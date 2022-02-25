@@ -3,7 +3,6 @@ package Data;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
-import java.util.TreeMap;
 
 public class Core {
     private final static HashMap<Player, PlayerData> playerDatas = new HashMap<>();

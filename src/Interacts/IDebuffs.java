@@ -4,11 +4,8 @@ import org.bukkit.entity.Player;
 
 public interface IDebuffs {
 
-    enum Debuffs {
-        SLOWNESS
-    }
+    void setDeBuffs(Player player);
+    void removeDeBuffs(Player player);
+    void removeDeBuffs(Player player, DebuffType deBuffs);
 
-    void setDebuffs(Player player);
-    void removeDebuffs(Player player);
-    void removeDebuffs(Player player, Debuffs debuffs);
 }
