@@ -1,19 +1,21 @@
 package Data;
 
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 
 public class Core {
-    private final static HashMap<Player, PlayerData> playerDatas = new HashMap<>();
 
-    public static PlayerData registerPlayer(Player player) {
-        PlayerData NewPlayerData = new PlayerData(player);
-        playerDatas.put(player, NewPlayerData);
-        return NewPlayerData;
+    private final static HashMap<LivingEntity, CoreData> Datas = new HashMap<>();
+
+    public static CoreData registerPlayer(LivingEntity master) {
+        CoreData newCoreData = new CoreData(master);
+        Datas.put(master, newCoreData);
+        return newCoreData;
     }
 
-    public static PlayerData getPlayerData(Player player) {
-        return playerDatas.get(player);
+    public static CoreData getData(LivingEntity master) {
+        return Datas.get(master);
     }
 }
