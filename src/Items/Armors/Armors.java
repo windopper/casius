@@ -5,6 +5,8 @@ import org.bukkit.inventory.ItemStack;
 public abstract class Armors {
 
     ItemStack itemStack;
+    ArmorType armorType;
+
     int health = 0;
     int elecdef = 0;
     int icedef = 0;
@@ -14,6 +16,12 @@ public abstract class Armors {
     int winddmg = 0;
 
     String Name = "";
+
+    Armors(ItemStack itemStack, ArmorType armorType, String Name) {
+        this.itemStack = itemStack;
+        this.armorType = armorType;
+        this.Name = Name;
+    }
 
     public ItemStack getItem() {
 

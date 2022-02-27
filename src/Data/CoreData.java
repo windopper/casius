@@ -1,6 +1,7 @@
 package Data;
 
 import Interacts.DeBuffContainer;
+import Items.Armors.ArmorType;
 import Items.Armors.Armors;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -14,8 +15,12 @@ public class CoreData {
 
     public int Health = 1000;
 
-    int mindmg = 0;
-    int maxdmg = 0;
+    int minIcedmg = 0;
+    int maxIcedmg = 0;
+    int minElecdmg = 0;
+    int maxElecdmg = 0;
+    int minWinddmg = 0;
+    int maxWinddmg = 0;
     public int iceDef = 0;
     public int elecDef = 0;
     public int windDef = 0;
@@ -26,12 +31,9 @@ public class CoreData {
     public int walkSpeed = 0;
     public int gold = 0;
 
-    List<DeBuffContainer> deBuffs = new ArrayList<>();
+    public List<DeBuffContainer> deBuffs = new ArrayList<>();
 
-    Armors boots;
-    Armors leggings;
-    Armors chestplate;
-    Armors helmet;
+    public Armors[] armors = new Armors[4];
 
     CoreData(LivingEntity master) {
         this.master = master;
@@ -53,5 +55,13 @@ public class CoreData {
             value /= 1000;
         }
         return value;
+    }
+
+    public void setArmor(ArmorType armorType, Armors armor) {
+        this.armors[armorType.ordinal()] = armor;
+    }
+
+    public void removeGold(int value) throws IllegalArgumentException {
+        if(gold - value < 0) throw new IllegalArgumentException();
     }
 }
