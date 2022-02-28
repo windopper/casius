@@ -16,7 +16,12 @@ public class Core {
     }
 
     public static CoreData getData(LivingEntity master) {
-        return Datas.get(master);
+        if(hasData(master)) return Datas.get(master);
+        return null;
+    }
+
+    public static boolean hasData(LivingEntity master) {
+        return Datas.containsKey(master);
     }
 
     public static Set<LivingEntity> getRegisteredEntity() { return Datas.keySet(); }

@@ -1,19 +1,14 @@
 package Items.Armors;
 
+import Items.Items;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class Armors {
+public abstract class Armors extends Items {
 
     ItemStack itemStack;
     ArmorType armorType;
 
-    int health = 0;
-    int elecdef = 0;
-    int icedef = 0;
-    int winddef = 0;
-    int elecdmg = 0;
-    int icedmg = 0;
-    int winddmg = 0;
+    public int health = 0;
 
     String Name = "";
 

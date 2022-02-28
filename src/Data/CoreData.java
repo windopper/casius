@@ -1,8 +1,10 @@
 package Data;
 
+import Interacts.BuffContainer;
 import Interacts.DeBuffContainer;
 import Items.Armors.ArmorType;
 import Items.Armors.Armors;
+import Items.Weapons.Weapons;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
@@ -13,27 +15,31 @@ public class CoreData {
 
     public final LivingEntity master;
 
-    public int Health = 1000;
-
-    int minIcedmg = 0;
-    int maxIcedmg = 0;
-    int minElecdmg = 0;
-    int maxElecdmg = 0;
-    int minWinddmg = 0;
-    int maxWinddmg = 0;
+    public int health = 1000;
+    public int currentHealth = 1000;
+    public int minIcedmg = 0;
+    public int maxIcedmg = 0;
+    public int minElecdmg = 0;
+    public int maxElecdmg = 0;
+    public int minWinddmg = 0;
+    public int maxWinddmg = 0;
     public int iceDef = 0;
     public int elecDef = 0;
     public int windDef = 0;
     public int iceDmg = 0;
     public int elecDmg = 0;
     public int windDmg = 0;
-
     public int walkSpeed = 0;
+
     public int gold = 0;
 
     public List<DeBuffContainer> deBuffs = new ArrayList<>();
+    public List<BuffContainer> buffs = new ArrayList<>();
 
     public Armors[] armors = new Armors[4];
+    public Weapons weapon;
+
+    public boolean pvpMode = true;
 
     CoreData(LivingEntity master) {
         this.master = master;
@@ -59,6 +65,14 @@ public class CoreData {
 
     public void setArmor(ArmorType armorType, Armors armor) {
         this.armors[armorType.ordinal()] = armor;
+    }
+
+    public void removeArmor(ArmorType armorType) {
+        this.armors[armorType.ordinal()] = null;
+    }
+
+    public void setWeapon(Weapons weapon) {
+        this.weapon = weapon;
     }
 
     public void removeGold(int value) throws IllegalArgumentException {

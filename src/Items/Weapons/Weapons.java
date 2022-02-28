@@ -5,11 +5,11 @@ import org.bukkit.inventory.ItemStack;
 
 public abstract class Weapons extends Items {
 
-    public int minElec = 0;
-    public int maxElec = 0;
-    public int minIce = 0;
-    public int maxIce = 0;
-    public int minWind = 0;
-    public int maxWind = 0;
+    public int minElecdmg = 0;
+    public int maxElecdmg = 0;
+    public int minIcedmg = 0;
+    public int maxIcedmg = 0;
+    public int minWinddmg = 0;
+    public int maxWinddmg = 0;
 
 }

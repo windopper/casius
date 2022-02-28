@@ -1,0 +1,10 @@
+main : Main.main
+name : PMGD
+version : 1.1.0
+api-version: 1.17
+author: kamilereon
+description: pvp minigames
+commands:
+  pmg:
+    description: pmg
+    usage: /pmg
