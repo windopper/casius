@@ -4,10 +4,11 @@ import org.bukkit.entity.LivingEntity;
 
 import java.util.HashMap;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Core {
 
-    private final static HashMap<LivingEntity, CoreData> Datas = new HashMap<>();
+    private final static ConcurrentHashMap<LivingEntity, CoreData> Datas = new ConcurrentHashMap<>();
 
     public static CoreData register(LivingEntity master) {
         CoreData newCoreData = new CoreData(master);
@@ -23,6 +24,8 @@ public class Core {
     public static boolean hasData(LivingEntity master) {
         return Datas.containsKey(master);
     }
+
+    public static void removeData(LivingEntity master) { Datas.remove(master); }
 
     public static Set<LivingEntity> getRegisteredEntity() { return Datas.keySet(); }
 }

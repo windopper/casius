@@ -6,7 +6,7 @@ import org.bukkit.inventory.ItemStack;
 public abstract class Armors extends Items {
 
     ItemStack itemStack;
-    ArmorType armorType;
+    public ArmorType armorType;
 
     public int health = 0;
 

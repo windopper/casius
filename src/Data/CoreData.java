@@ -1,5 +1,6 @@
 package Data;
 
+import Ability.Ability;
 import Interacts.BuffContainer;
 import Interacts.DeBuffContainer;
 import Items.Armors.ArmorType;
@@ -17,6 +18,9 @@ public class CoreData {
 
     public int health = 1000;
     public int currentHealth = 1000;
+    public int energy = 200;
+    public int currentEnergy = 200;
+
     public int minIcedmg = 0;
     public int maxIcedmg = 0;
     public int minElecdmg = 0;
@@ -35,6 +39,9 @@ public class CoreData {
 
     public List<DeBuffContainer> deBuffs = new ArrayList<>();
     public List<BuffContainer> buffs = new ArrayList<>();
+
+    public Ability[] abilities = new Ability[4];
+    public int[] coolDowns = {0, 0, 0, 0};
 
     public Armors[] armors = new Armors[4];
     public Weapons weapon;
@@ -63,8 +70,8 @@ public class CoreData {
         return value;
     }
 
-    public void setArmor(ArmorType armorType, Armors armor) {
-        this.armors[armorType.ordinal()] = armor;
+    public void setArmor(Armors armor) {
+        this.armors[armor.armorType.ordinal()] = armor;
     }
 
     public void removeArmor(ArmorType armorType) {
@@ -74,6 +81,8 @@ public class CoreData {
     public void setWeapon(Weapons weapon) {
         this.weapon = weapon;
     }
+
+    public void setAbility(Ability ability) { this.abilities[ability.abilitySlot.ordinal()] = ability; }
 
     public void removeGold(int value) throws IllegalArgumentException {
         if(gold - value < 0) throw new IllegalArgumentException();

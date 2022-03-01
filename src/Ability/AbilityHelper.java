@@ -15,6 +15,7 @@ public class AbilityHelper {
         List<LivingEntity> targetEntities = new ArrayList<>();
         CoreData masterData = Core.getData(master);
         if(masterData == null) return targetEntities;
+        if(!masterData.pvpMode) return targetEntities;
 
         for(LivingEntity livingEntity : Objects.requireNonNull(location.getWorld()).getLivingEntities()) {
             Location targetLoc = livingEntity.getLocation();
@@ -22,6 +23,8 @@ public class AbilityHelper {
 
             CoreData targetData = Core.getData(livingEntity);
             if(targetData == null) continue;
+            if(!targetData.pvpMode) continue;
+
 
             targetEntities.add(livingEntity);
         }

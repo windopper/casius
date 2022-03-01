@@ -21,9 +21,21 @@ public class RealTimeLoop {
             double health = coreData.health;
 
             if(currentHealth <= health) {
-                entity.setHealth(currentHealth / health);
+                entity.setHealth(currentHealth / health * entity.getMaxHealth());
             } else {
                 entity.setHealth(entity.getMaxHealth());
+            }
+        }
+    }
+    public void updateCoolDown() {
+        for(LivingEntity entity : Core.getRegisteredEntity()) {
+            CoreData coreData = Core.getData(entity);
+            if(coreData == null) continue;
+
+            for(int i=0; i<coreData.coolDowns.length; i++) {
+                int C = coreData.coolDowns[i];
+                if(C - 0.1 < 0) coreData.coolDowns[i] = 0;
+                else coreData.coolDowns[i] -= 0.1;
             }
         }
     }
