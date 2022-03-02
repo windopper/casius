@@ -1,27 +1,36 @@
 package Items.Armors;
 
 import Items.Items;
+import Utils.ItemBuilder;
 import org.bukkit.inventory.ItemStack;
 
 public abstract class Armors extends Items {
 
-    ItemStack itemStack;
-    public ArmorType armorType;
-
-    public int health = 0;
-
-    String Name = "";
+    public final ArmorType armorType;
 
     Armors(ItemStack itemStack, ArmorType armorType, String Name) {
-        this.itemStack = itemStack;
+        super(itemStack, Name);
         this.armorType = armorType;
-        this.Name = Name;
     }
 
     public ItemStack getItem() {
+        ItemBuilder itemBuilder = ItemBuilder.getBuilder()
+                .setItemType(itemStack)
+                .setIceDefense(icedef)
+                .setElecDefense(elecdef)
+                .setWindDefense(winddef)
+                .setIceDamage(icedmg)
+                .setElecDamage(elecdmg)
+                .setWindDamage(winddmg)
+                .setWalkSpeed(walkSpeed)
+                .setEnergyRegen(energyRegen)
+                .setHealthRegen(healthRegen)
+                .setAdditionalEnergy(additionalEnergy)
+                .setAdditionalHealth(additionalHealth)
+                .setItemName(Name)
+                .setLore(Lore);
 
-        //TODO 구현부 작성
-        return itemStack;
+        return itemBuilder.build();
 
     }
 

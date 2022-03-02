@@ -2,6 +2,7 @@ package Data;
 
 import org.bukkit.entity.LivingEntity;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,6 +20,10 @@ public class Core {
     public static CoreData getData(LivingEntity master) {
         if(hasData(master)) return Datas.get(master);
         return null;
+    }
+
+    public static Collection<CoreData> getDatas() {
+        return Datas.values();
     }
 
     public static boolean hasData(LivingEntity master) {

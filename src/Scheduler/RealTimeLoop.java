@@ -33,7 +33,7 @@ public class RealTimeLoop {
             if(coreData == null) continue;
 
             for(int i=0; i<coreData.coolDowns.length; i++) {
-                int C = coreData.coolDowns[i];
+                double C = coreData.coolDowns[i];
                 if(C - 0.1 < 0) coreData.coolDowns[i] = 0;
                 else coreData.coolDowns[i] -= 0.1;
             }

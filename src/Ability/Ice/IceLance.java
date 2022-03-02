@@ -10,11 +10,11 @@ import org.bukkit.entity.Player;
 public class IceLance extends Ability implements Damageable {
 
     public IceLance() {
-        super(AbilitySlot.RLR, 5);
+        super(AbilitySlot.RLR, 5, 20);
     }
 
     @Override
-    public void invoke(LivingEntity master) {
+    public void invokeAbility(LivingEntity livingEntity) {
 
     }
 

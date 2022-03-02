@@ -6,6 +6,7 @@ import Interacts.DeBuffContainer;
 import Items.Armors.ArmorType;
 import Items.Armors.Armors;
 import Items.Weapons.Weapons;
+import KeyBinds.Keys;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
@@ -18,9 +19,10 @@ public class CoreData {
 
     public int health = 1000;
     public int currentHealth = 1000;
+    public int healthRegen = 10; // per second
     public int energy = 200;
     public int currentEnergy = 200;
-
+    public int energyRegen = 5; // per second
     public int minIcedmg = 0;
     public int maxIcedmg = 0;
     public int minElecdmg = 0;
@@ -41,10 +43,13 @@ public class CoreData {
     public List<BuffContainer> buffs = new ArrayList<>();
 
     public Ability[] abilities = new Ability[4];
-    public int[] coolDowns = {0, 0, 0, 0};
+    public double[] coolDowns = {0, 0, 0, 0};
 
     public Armors[] armors = new Armors[4];
     public Weapons weapon;
+
+    public List<Keys> keys = new ArrayList<>();
+    public int keyWait = 0;
 
     public boolean pvpMode = true;
 

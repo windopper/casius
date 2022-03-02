@@ -8,25 +8,40 @@ public interface IItemBuilder {
 
     ItemBuilder setItemType(Material material);
 
-    ItemBuilder setMinIceDamage(int var);
-    ItemBuilder setMaxIceDamage(int var);
-    ItemBuilder setMinElecDamage(int var);
-    ItemBuilder setMaxElecDamage(int var);
-    ItemBuilder setMinWindDamage(int var);
-    ItemBuilder setMaxWinDamage(int var);
-    ItemBuilder setMinIceDefense(int var);
-    ItemBuilder setMaxIceDefense(int var);
-    ItemBuilder setMinElecDefense(int var);
-    ItemBuilder setMaxElecDefense(int var);
-    ItemBuilder setMinWindDefense(int var);
-    ItemBuilder setMaxWindDefense(int var);
+    ItemBuilder setItemType(ItemStack itemStack);
+
+    ItemBuilder setRangeIceDamage(int min, int max);
+
+    ItemBuilder setRangeElecDamage(int min, int max);
+
+    ItemBuilder setRangeWindDamage(int min, int max);
+
+    ItemBuilder setIceDefense(int var);
+
+    ItemBuilder setElecDefense(int var);
+
+    ItemBuilder setWindDefense(int var);
+
+    ItemBuilder setIceDamage(int var);
+
+    ItemBuilder setElecDamage(int var);
+
+    ItemBuilder setWindDamage(int var);
+
     ItemBuilder setAdditionalHealth(int var);
+
+    ItemBuilder setAdditionalEnergy(int var);
+
+    ItemBuilder setHealthRegen(int var);
+
+    ItemBuilder setEnergyRegen(int var);
+
     ItemBuilder setWalkSpeed(int var);
 
-    //14
-
     ItemBuilder setItemName(String var);
+
     ItemBuilder setLore(List<String> var);
+
     ItemStack build();
 
 }
