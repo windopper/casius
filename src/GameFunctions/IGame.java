@@ -1,4 +1,4 @@
-package Game;
+package GameFunctions;
 
 public interface IGame {
     void Ready();

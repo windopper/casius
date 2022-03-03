@@ -2,6 +2,7 @@ package KeyBinds;
 
 import Data.Constants;
 import Data.CoreData;
+import org.bukkit.entity.LivingEntity;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -29,21 +30,22 @@ public class KeyEvents {
 
     private void runAbility(CoreData coreData) {
         List<Keys> keysList = coreData.keys;
+        LivingEntity master = coreData.master;
         Keys first = keysList.get(0);
         Keys second = keysList.get(1);
         Keys third = keysList.get(2);
 
         if(first == Keys.R && second == Keys.L && third == Keys.R) {
-            
+            coreData.abilities[0].run(master);
         }
         else if(first == Keys.R && second == Keys.R && third == Keys.R) {
-
+            coreData.abilities[1].run(master);
         }
         else if(first == Keys.R && second == Keys.L && third == Keys.L) {
-
+            coreData.abilities[2].run(master);
         }
         else {
-
+            coreData.abilities[3].run(master);
         }
     }
 
@@ -51,6 +53,7 @@ public class KeyEvents {
         coreData.keys.add(keys);
         coreData.keyWait = Constants.KEY_WAIT.getValue();
         if(isKeyCombinationFull(coreData)) {
+            runAbility(coreData);
             initializingKeyCombination(coreData);
         }
     }

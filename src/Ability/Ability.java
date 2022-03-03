@@ -25,15 +25,20 @@ public abstract class Ability {
     }
 
     public void run(LivingEntity livingEntity) {
+
         checkCondition(livingEntity);
+
         preInvokeAbility(livingEntity);
+
         invokeAbility(livingEntity);
+
     }
 
     public boolean checkCondition(LivingEntity livingEntity) {
         CoreData coreData = Core.getData(livingEntity);
 
         if(coreData == null) return false;
+
         if(coreData.currentEnergy < energyRequire) {
             return false;
         }
@@ -46,12 +51,13 @@ public abstract class Ability {
     public void preInvokeAbility(LivingEntity livingEntity) {
         CoreData coreData = Core.getData(livingEntity);
         assert coreData != null;
-
         coreData.currentEnergy -= energyRequire;
         coreData.coolDowns[abilitySlot.ordinal()] = coolDown;
     }
+
     public abstract void invokeAbility(LivingEntity livingEntity);
 
     public abstract void abilityDesign(Location location);
+
     public abstract void abilityEffect(LivingEntity target);
 }

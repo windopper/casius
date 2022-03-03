@@ -12,6 +12,9 @@ public class FrostWand extends Weapons implements IActive {
                 new ItemStack(Material.STICK, 1),
                 "FrostWand"
         );
+
+        super.minIcedmg = 50;
+        super.maxIcedmg = 100;
     }
 
     @Override

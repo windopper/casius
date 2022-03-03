@@ -1,5 +1,10 @@
 package EventListener;
 
+import Data.Core;
+import Data.CoreData;
+import KeyBinds.KeyEvents;
+import KeyBinds.Keys;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -19,11 +24,15 @@ public class CoreListener implements Listener {
     }
     @EventHandler
     public void PlayerInteractEvent(PlayerInteractEvent event) {
-        if(event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
+        Player player = event.getPlayer();
+        CoreData coreData = Core.getData(player);
+        if(coreData == null) return;
 
+        if(event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
+            KeyEvents.getInstance().registerKey(Keys.L, coreData);
         }
         else if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-
+            KeyEvents.getInstance().registerKey(Keys.R, coreData);
         }
     }
     @EventHandler

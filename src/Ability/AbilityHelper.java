@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class AbilityHelper {
+
     public static List<LivingEntity> getValidEntities(double radius, Location location, LivingEntity master) {
 
         List<LivingEntity> targetEntities = new ArrayList<>();

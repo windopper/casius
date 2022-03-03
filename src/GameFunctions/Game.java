@@ -1,6 +1,4 @@
-package Game;
-
-import java.util.Optional;
+package GameFunctions;
 
 public class Game implements IGame {
 

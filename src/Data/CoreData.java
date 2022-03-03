@@ -47,11 +47,13 @@ public class CoreData {
 
     public Armors[] armors = new Armors[4];
     public Weapons weapon;
+    //TODO 기본 무기 만들기
 
     public List<Keys> keys = new ArrayList<>();
     public int keyWait = 0;
 
     public boolean pvpMode = true;
+    public boolean showParticle = true;
 
     CoreData(LivingEntity master) {
         this.master = master;
@@ -88,6 +90,16 @@ public class CoreData {
     }
 
     public void setAbility(Ability ability) { this.abilities[ability.abilitySlot.ordinal()] = ability; }
+
+    public void addHealth(int var) {
+        if(currentHealth + var > health) return;
+        currentHealth += var;
+    }
+
+    public void addEnergy(int var) {
+        if(currentEnergy + var > energy) return;
+        currentEnergy += var;
+    }
 
     public void removeGold(int value) throws IllegalArgumentException {
         if(gold - value < 0) throw new IllegalArgumentException();
