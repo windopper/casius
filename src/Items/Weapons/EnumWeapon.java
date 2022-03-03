@@ -1,8 +1,9 @@
 package Items.Weapons;
 
+import Items.IEnumItem;
 import org.bukkit.inventory.ItemStack;
 
-public enum EnumWeapon {
+public enum EnumWeapon implements IEnumItem {
 
     FrostWand("FrostWand");
 
@@ -12,9 +13,10 @@ public enum EnumWeapon {
         this.weaponName = weaponName;
     }
 
+    @Override
     public ItemStack getItem() {
         try {
-            Class clazz = Class.forName(weaponName);
+            Class clazz = Class.forName(name());
             Weapons object = (Weapons) clazz.getDeclaredConstructor(clazz).newInstance();
             ItemStack itemStack = object.getItem();
             return itemStack;
@@ -23,5 +25,10 @@ public enum EnumWeapon {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public String getName() {
+        return this.weaponName;
     }
 }

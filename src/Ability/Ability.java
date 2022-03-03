@@ -26,10 +26,13 @@ public abstract class Ability {
 
     public void run(LivingEntity livingEntity) {
 
+        // 발동 가능 조건 충족하는지 확인
         checkCondition(livingEntity);
 
+        // 필요한 자원 사용
         preInvokeAbility(livingEntity);
 
+        // 능력 발동
         invokeAbility(livingEntity);
 
     }

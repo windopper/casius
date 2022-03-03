@@ -2,6 +2,7 @@ package EventListener;
 
 import Data.Core;
 import Data.CoreData;
+import Helper.ItemHelper;
 import KeyBinds.KeyEvents;
 import KeyBinds.Keys;
 import org.bukkit.entity.Player;
@@ -28,12 +29,21 @@ public class CoreListener implements Listener {
         CoreData coreData = Core.getData(player);
         if(coreData == null) return;
 
-        if(event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
-            KeyEvents.getInstance().registerKey(Keys.L, coreData);
+        ItemHelper.ItemType itemType = ItemHelper.classifyItem(event.getItem());
+
+        if(itemType == ItemHelper.ItemType.WEAPON) {
+            if(event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
+                KeyEvents.getInstance().registerKey(Keys.L, coreData);
+            }
+            else if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+                KeyEvents.getInstance().registerKey(Keys.R, coreData);
+            }
         }
-        else if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            KeyEvents.getInstance().registerKey(Keys.R, coreData);
+        else if(itemType == ItemHelper.ItemType.USES) {
+
         }
+
+
     }
     @EventHandler
     public void PlayerInteractAtEntityEvent(PlayerInteractAtEntityEvent event) {
