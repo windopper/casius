@@ -1,5 +1,6 @@
 package Main;
 
+import Commands.ItemCommands;
 import EventListener.CoreListener;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -31,7 +32,10 @@ public class main extends JavaPlugin {
 
         String cmdName = command.getName().toLowerCase();
 
+        ItemCommands.Listen(player, cmdName, args);
 
-        return super.onCommand(sender, command, label, args);
+
+
+        return true;
     }
 }

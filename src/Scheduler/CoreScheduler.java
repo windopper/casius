@@ -9,6 +9,7 @@ public class CoreScheduler {
     public static void startScheduler() {
 
         Bukkit.getScheduler().runTaskTimer(main.getPlugin(main.class), () -> {
+
             ActionBar.ShowActionBar();
 
             for(CoreData coreData : Core.getDatas()) {

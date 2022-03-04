@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class AbilityHelper {
 
-    public static List<LivingEntity> getValidEntities(double radius, Location location, LivingEntity master) {
+    public static List<LivingEntity> getValidEntitiesInRadius(double radius, Location location, LivingEntity master) {
 
         List<LivingEntity> targetEntities = new ArrayList<>();
         CoreData masterData = Core.getData(master);
@@ -25,7 +25,6 @@ public class AbilityHelper {
             CoreData targetData = Core.getData(livingEntity);
             if(targetData == null) continue;
             if(!targetData.pvpMode) continue;
-
 
             targetEntities.add(livingEntity);
         }

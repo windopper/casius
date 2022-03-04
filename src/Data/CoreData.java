@@ -59,24 +59,6 @@ public class CoreData {
         this.master = master;
     }
 
-    public double defHelper(int def) {
-        double value = 1000;
-        if(def <= 1000) {
-            value -= def;
-            value /= 1000;
-        }
-        return value;
-    }
-
-    public double dmgHelper(int dmg) {
-        double value = 1000;
-        if(dmg >= -1000) {
-            value += dmg;
-            value /= 1000;
-        }
-        return value;
-    }
-
     public void setArmor(Armors armor) {
         this.armors[armor.armorType.ordinal()] = armor;
     }

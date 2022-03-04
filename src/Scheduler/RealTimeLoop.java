@@ -31,7 +31,9 @@ public class RealTimeLoop {
         double currentHealth = coreData.currentHealth;
         double health = coreData.health;
 
-        if(currentHealth <= health) {
+        if(currentHealth <= 0) {
+
+        } else if(currentHealth <= health) {
             entity.setHealth(currentHealth / health * entity.getMaxHealth());
         } else {
             entity.setHealth(entity.getMaxHealth());

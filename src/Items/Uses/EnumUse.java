@@ -1,7 +1,7 @@
 package Items.Uses;
 
+import Data.CoreData;
 import Items.IEnumItem;
-import Items.Items;
 import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Constructor;
@@ -27,15 +27,15 @@ public enum EnumUse implements IEnumItem {
         return useName;
     }
 
-    public Method getUseAbility() {
+    public void useAbility(CoreData coreData) {
         try {
             Class<?> clazz = Class.forName(name());
             Constructor constructor = clazz.getConstructor();
-            Method method = constructor.newInstance().getClass().getMethod("mainFunction", clazz);
-            return method;
+            Method method = clazz.getMethod("mainFunction");
+            method.invoke(constructor.newInstance(), coreData);
         }
         catch(Exception e) {
-            return null;
+            e.printStackTrace();
         }
     }
 }
