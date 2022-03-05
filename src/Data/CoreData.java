@@ -11,12 +11,15 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class CoreData {
 
     public final LivingEntity master;
 
+    /** STATS */
     public int health = 1000;
     public int currentHealth = 1000;
     public int healthRegen = 10; // per second
@@ -39,9 +42,12 @@ public class CoreData {
 
     public int gold = 0;
 
+    /** EFFECTS */
     public List<DeBuffContainer> deBuffs = new ArrayList<>();
     public List<BuffContainer> buffs = new ArrayList<>();
+    public ConcurrentLinkedQueue<String> evasions = new ConcurrentLinkedQueue<>();
 
+    /** EQUIPMENTS */
     public Ability[] abilities = new Ability[4];
     public double[] coolDowns = {0, 0, 0, 0};
 
@@ -52,6 +58,8 @@ public class CoreData {
     public List<Keys> keys = new ArrayList<>();
     public int keyWait = 0;
 
+
+    /** CONFIGURATIONS */
     public boolean pvpMode = true;
     public boolean showParticle = true;
 

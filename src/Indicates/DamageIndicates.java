@@ -40,6 +40,11 @@ public class DamageIndicates {
         return this;
     }
 
+    public DamageIndicates addEvasion() {
+        content += ChatColor.of(ChatColor.of("#87CEFA")+"회피!");
+        return this;
+    }
+
     public void build() {
         ArmorStand armorStand = Indicates.getIndicates(location);
         armorStand.setCustomName(content);

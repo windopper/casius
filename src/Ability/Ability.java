@@ -4,7 +4,6 @@ import Data.Core;
 import Data.CoreData;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 
 public abstract class Ability {
 
@@ -24,21 +23,20 @@ public abstract class Ability {
         this.energyRequire = energyRequire;
     }
 
-    public void run(LivingEntity livingEntity) {
+    public void run(CoreData coreData) {
 
         // 발동 가능 조건 충족하는지 확인
-        checkCondition(livingEntity);
+        checkCondition(coreData);
 
         // 필요한 자원 사용
-        preInvokeAbility(livingEntity);
+        preInvokeAbility(coreData);
 
         // 능력 발동
-        invokeAbility(livingEntity);
+        invokeAbility(coreData);
 
     }
 
-    public boolean checkCondition(LivingEntity livingEntity) {
-        CoreData coreData = Core.getData(livingEntity);
+    public boolean checkCondition(CoreData coreData) {
 
         if(coreData == null) return false;
 
@@ -51,14 +49,13 @@ public abstract class Ability {
         return true;
     }
 
-    public void preInvokeAbility(LivingEntity livingEntity) {
-        CoreData coreData = Core.getData(livingEntity);
+    public void preInvokeAbility(CoreData coreData) {
         assert coreData != null;
         coreData.currentEnergy -= energyRequire;
         coreData.coolDowns[abilitySlot.ordinal()] = coolDown;
     }
 
-    public abstract void invokeAbility(LivingEntity livingEntity);
+    public abstract void invokeAbility(CoreData coreData);
 
     public abstract void abilityDesign(Location location);
 

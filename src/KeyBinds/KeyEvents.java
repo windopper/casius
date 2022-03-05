@@ -24,28 +24,27 @@ public class KeyEvents {
         return coreData.keys.size() == 3;
     }
 
-    private void initializingKeyCombination(CoreData coreData) {
+    private void resetKeyCombination(CoreData coreData) {
         coreData.keys.clear();
     }
 
     private void runAbility(CoreData coreData) {
         List<Keys> keysList = coreData.keys;
-        LivingEntity master = coreData.master;
         Keys first = keysList.get(0);
         Keys second = keysList.get(1);
         Keys third = keysList.get(2);
 
         if(first == Keys.R && second == Keys.L && third == Keys.R) {
-            coreData.abilities[0].run(master);
+            coreData.abilities[0].run(coreData);
         }
         else if(first == Keys.R && second == Keys.R && third == Keys.R) {
-            coreData.abilities[1].run(master);
+            coreData.abilities[1].run(coreData);
         }
         else if(first == Keys.R && second == Keys.L && third == Keys.L) {
-            coreData.abilities[2].run(master);
+            coreData.abilities[2].run(coreData);
         }
         else {
-            coreData.abilities[3].run(master);
+            coreData.abilities[3].run(coreData);
         }
     }
 
@@ -54,7 +53,7 @@ public class KeyEvents {
         coreData.keyWait = Constants.KEY_WAIT.getValue();
         if(isKeyCombinationFull(coreData)) {
             runAbility(coreData);
-            initializingKeyCombination(coreData);
+            resetKeyCombination(coreData);
         }
     }
 

@@ -12,6 +12,15 @@ public class DamageUtil {
         LivingEntity master = masterCoreData.master;
         LivingEntity target = targetCoreData.master;
 
+        DamageIndicates damageIndicates = DamageIndicates.getBuilder(target.getEyeLocation());
+
+        // 타겟이 회피가 가능하면
+        if(targetCoreData.evasions.size() > 0) {
+            targetCoreData.evasions.remove();
+            damageIndicates.addEvasion().build();
+            return;
+        }
+
         int masterMinIceDamage = masterCoreData.minIcedmg;
         int masterMaxIceDamage = masterCoreData.maxIcedmg;
         int masterMinElecDamage = masterCoreData.minElecdmg;
@@ -36,7 +45,7 @@ public class DamageUtil {
         int masterFinalWindDamage = (int) (damageCalculate(masterRandomWindDamage, masterWindDamageVar, targetWindDefenseVar) *
                         windDamageRate);
 
-        DamageIndicates damageIndicates = DamageIndicates.getBuilder(target.getEyeLocation());
+
         if(masterFinalIceDamage != 0) damageIndicates.addIceDamage(masterFinalIceDamage);
         if(masterFinalElecDamage != 0) damageIndicates.addElecDamage(masterFinalElecDamage);
         if(masterFinalWindDamage != 0) damageIndicates.addWindDamage(masterFinalWindDamage);

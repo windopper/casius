@@ -1,4 +1,4 @@
-package Ability.Ice;
+package Ability.Wind;
 
 import Ability.Ability;
 import Ability.AbilitySlot;
@@ -7,10 +7,14 @@ import Data.CoreData;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 
-public class IceLance extends Ability implements Damageable {
+public class StormBlade extends Ability implements Damageable {
 
-    public IceLance() {
-        super(AbilitySlot.RLR, 5, 20);
+    public StormBlade() {
+        super(
+                AbilitySlot.RLR,
+                3,
+                10
+        );
     }
 
     @Override
