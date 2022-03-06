@@ -26,26 +26,28 @@ public class DamageIndicates {
     }
 
     public DamageIndicates addIceDamage(int damage) {
-        content += ChatColor.of("#87ceeb")+"❅ -"+damage;
+        content += ChatColor.of("#87ceeb")+"❅ -"+damage+" ";
         return this;
     }
 
     public DamageIndicates addElecDamage(int damage) {
-        content += ChatColor.of("#aa3dff")+"🗲 -"+damage;
+        content += ChatColor.of("#aa3dff")+"⚡ -"+damage+" ";
         return this;
     }
 
     public DamageIndicates addWindDamage(int damage) {
-        content += ChatColor.of("#4e8cf8")+"🌪️ -"+damage;
+        content += ChatColor.of("#4e8cf8")+"☁ -"+damage+" ";
         return this;
     }
 
     public DamageIndicates addEvasion() {
-        content += ChatColor.of(ChatColor.of("#87CEFA")+"회피!");
+        content += ChatColor.of("#87CEFA")+"회피!";
         return this;
     }
 
     public void build() {
+        if(content.length() == 0) return;
+
         ArmorStand armorStand = Indicates.getIndicates(location);
         armorStand.setCustomName(content);
         Bukkit.getScheduler().scheduleSyncDelayedTask(main.getPlugin(main.class), armorStand::remove, 25);

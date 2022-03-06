@@ -1,11 +1,11 @@
 package Scheduler;
 
-import Data.CoreData;
+import Data.PlayerCoreData;
 
 public class KeyBinds {
 
-    public static void updateKeyBinds(CoreData coreData) {
-        if(coreData.keyWait == 0) coreData.keys.clear();
-        else if(coreData.keyWait > 0) coreData.keyWait--;
+    public static void updateKeyBinds(PlayerCoreData playerCoreData) {
+        if(playerCoreData.keyWait == 0) playerCoreData.keys.clear();
+        else if(playerCoreData.keyWait > 0) playerCoreData.keyWait--;
     }
 }

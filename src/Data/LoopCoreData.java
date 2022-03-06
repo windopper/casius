@@ -8,7 +8,7 @@ public class LoopCoreData {
     public void LoopCoreData() {
         Set<LivingEntity> entities = Core.getRegisteredEntity();
         for(LivingEntity entity : entities) {
-            CoreData coreData = Core.getData(entity);
+            CoreData playerCoreData = Core.getData(entity);
 
         }
     }

@@ -3,7 +3,7 @@ package Ability.Wind;
 import Ability.Ability;
 import Ability.AbilitySlot;
 import Ability.Damageable;
-import Data.CoreData;
+import Data.PlayerCoreData;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 
@@ -11,6 +11,7 @@ public class StormBlade extends Ability implements Damageable {
 
     public StormBlade() {
         super(
+                "폭풍칼날",
                 AbilitySlot.RLR,
                 3,
                 10
@@ -18,7 +19,7 @@ public class StormBlade extends Ability implements Damageable {
     }
 
     @Override
-    public void invokeAbility(CoreData coreData) {
+    public void invokeAbility(PlayerCoreData playerCoreData) {
 
     }
 

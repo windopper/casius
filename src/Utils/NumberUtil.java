@@ -6,6 +6,7 @@ public class NumberUtil {
     public static int randomInt(int min, int max) {
         try {
             if(max < min) throw new Exception("parameter 'min' cannot be bigger than 'max'");
+            else if(max == min) return 0;
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -20,6 +21,7 @@ public class NumberUtil {
     public static double randomDouble(double min, double max) {
         try {
             if(max < min) throw new Exception("parameter 'min' cannot be bigger than 'max'");
+            else if(max == min) return 0;
         }
         catch(Exception e) {
             e.printStackTrace();

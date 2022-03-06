@@ -10,6 +10,8 @@ public interface IItemBuilder {
 
     ItemBuilder setItemType(ItemStack itemStack);
 
+    ItemBuilder enterLine();
+
     ItemBuilder setRangeIceDamage(int min, int max);
 
     ItemBuilder setRangeElecDamage(int min, int max);

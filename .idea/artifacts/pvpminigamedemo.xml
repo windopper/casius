@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="pvpminigamedemo">
+    <output-path>$USER_HOME$/Desktop/java.bukkit.project/BUKKIT/1.17.1 RL/plugins</output-path>
+    <root id="archive" name="pvpminigamedemo.jar">
+      <element id="module-output" name="pvpminigamedemo" />
+      <element id="dir-copy" path="$PROJECT_DIR$/resources" />
+    </root>
+  </artifact>
+</component>

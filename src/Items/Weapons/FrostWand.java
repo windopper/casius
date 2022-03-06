@@ -15,6 +15,11 @@ public class FrostWand extends Weapons implements IActive {
 
         super.minIcedmg = 50;
         super.maxIcedmg = 100;
+        super.minElecdmg = 10;
+        super.maxElecdmg = 20;
+        super.minWinddmg = 20;
+        super.maxWinddmg = 40;
+        super.additionalEnergy = 5;
     }
 
     @Override

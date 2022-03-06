@@ -16,13 +16,14 @@ public class Indicates {
         Location _location = new Location(
                 location.getWorld(),
                 NumberUtil.randomDouble(X-1, X+1),
-                NumberUtil.randomDouble(Y, Y+1),
+                NumberUtil.randomDouble(Y-0.5, Y+0.5),
                 NumberUtil.randomDouble(Z-1, Z+1)
                 );
 
         ArmorStand armorStand = (ArmorStand) location.getWorld().spawnEntity(_location, EntityType.ARMOR_STAND);
         armorStand.setMarker(true);
-        armorStand.setVisible(true);
+        armorStand.setInvisible(true);
+        armorStand.setInvulnerable(true);
         armorStand.setSmall(true);
         armorStand.setCustomNameVisible(true);
 

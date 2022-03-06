@@ -1,16 +1,16 @@
 package Items.Uses;
 
-import Data.CoreData;
+import Data.PlayerCoreData;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public abstract class Uses {
 
-    protected abstract void mainFunction(CoreData coreData);
+    protected abstract void mainFunction(PlayerCoreData playerCoreData);
 
-    protected void use(CoreData coreData) {
-        removeItem((Player) coreData.master);
-        mainFunction(coreData);
+    protected void use(PlayerCoreData playerCoreData) {
+        removeItem((Player) playerCoreData.master);
+        mainFunction(playerCoreData);
     }
 
     private void removeItem(Player player) {

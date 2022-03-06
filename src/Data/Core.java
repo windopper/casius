@@ -1,28 +1,34 @@
 package Data;
 
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Core {
 
-    private final static ConcurrentHashMap<LivingEntity, CoreData> Datas = new ConcurrentHashMap<>();
+    private final static ConcurrentHashMap<LivingEntity, PlayerCoreData> Datas = new ConcurrentHashMap<>();
+    private final static ConcurrentHashMap<LivingEntity, ? extends CoreData<? extends LivingEntity>> CoreDatas = new ConcurrentHashMap<>();
 
-    public static CoreData register(LivingEntity master) {
-        CoreData newCoreData = new CoreData(master);
-        Datas.put(master, newCoreData);
-        return newCoreData;
+    public static PlayerCoreData register(Player master) {
+        PlayerCoreData newPlayerCoreData = new PlayerCoreData(master);
+        Datas.put(master, newPlayerCoreData);
+        return newPlayerCoreData;
     }
 
+    public static PlayerCoreData getPlayerData(Player master) {
+        if(hasData(master)) return Datas.get(master);
+        return null;
+    }
+    
     public static CoreData getData(LivingEntity master) {
         if(hasData(master)) return Datas.get(master);
         return null;
     }
 
-    public static Collection<CoreData> getDatas() {
+    public static Collection<PlayerCoreData> getPlayerDatas() {
         return Datas.values();
     }
 

@@ -23,6 +23,8 @@ public class ItemBuilder implements IItemBuilder {
         return true;
     }
 
+
+
     @Override
     public ItemBuilder setItemType(Material material) {
         this.itemStack = new ItemStack(material, 1);
@@ -36,100 +38,106 @@ public class ItemBuilder implements IItemBuilder {
     }
 
     @Override
+    public ItemBuilder enterLine() {
+        Lore.add("");
+        return this;
+    }
+
+    @Override
     public ItemBuilder setRangeIceDamage(int min, int max) {
         if(isZeroValue(min, max)) return this;
-        Lore.set(1, ChatColor.of("#87ceeb")+"❅ 냉기피해량 "+min+" - "+max);
+        Lore.add(ChatColor.of("#87ceeb")+"❅ 냉기피해량 "+min+" - "+max);
         return this;
     }
 
     @Override
     public ItemBuilder setRangeElecDamage(int min, int max) {
         if(isZeroValue(min, max)) return this;
-        Lore.set(1, ChatColor.of("#aa3dff")+"🗲 전격피해량 "+min+" - "+max);
+        Lore.add(ChatColor.of("#aa3dff")+"⚡ 전격피해량 "+min+" - "+max);
         return this;
     }
 
     @Override
     public ItemBuilder setRangeWindDamage(int min, int max) {
         if(isZeroValue(min, max)) return this;
-        Lore.set(1, ChatColor.of("#4e8cf8")+"🌪️ 바람피해량 "+min+" - "+max);
+        Lore.add(ChatColor.of("#4e8cf8")+"☁ 바람피해량 "+min+" - "+max);
         return this;
     }
 
     @Override
     public ItemBuilder setIceDefense(int var) {
         if(isZeroValue(var)) return this;
-        Lore.set(3, "냉기저항력 "+var);
+        Lore.add("냉기저항력 "+var);
         return this;
     }
 
     @Override
     public ItemBuilder setElecDefense(int var) {
         if(isZeroValue(var)) return this;
-        Lore.set(3, "전격저항력 "+var);
+        Lore.add("전격저항력 "+var);
         return this;
     }
 
     @Override
     public ItemBuilder setWindDefense(int var) {
         if(isZeroValue(var)) return this;
-        Lore.set(3, "바람저항력 "+var);
+        Lore.add("바람저항력 "+var);
         return this;
     }
 
     @Override
     public ItemBuilder setIceDamage(int var) {
         if(isZeroValue(var)) return this;
-        Lore.set(3, "냉기증폭량 "+var);
+        Lore.add("냉기증폭량 "+var);
         return this;
     }
 
     @Override
     public ItemBuilder setElecDamage(int var) {
         if(isZeroValue(var)) return this;
-        Lore.set(3, "전격증폭량 "+var);
+        Lore.add("전격증폭량 "+var);
         return this;
     }
 
     @Override
     public ItemBuilder setWindDamage(int var) {
         if(isZeroValue(var)) return this;
-        Lore.set(3, "바람증폭량 "+var);
+        Lore.add("바람증폭량 "+var);
         return this;
     }
 
     @Override
     public ItemBuilder setAdditionalHealth(int var) {
         if(isZeroValue(var)) return this;
-        Lore.set(3, "추가체력 "+var);
+        Lore.add("추가체력 "+var);
         return this;
     }
 
     @Override
     public ItemBuilder setAdditionalEnergy(int var) {
         if(isZeroValue(var)) return this;
-        Lore.set(3, "추가에너지 "+var);
+        Lore.add("추가에너지 "+var);
         return this;
     }
 
     @Override
     public ItemBuilder setHealthRegen(int var) {
         if(isZeroValue(var)) return this;
-        Lore.set(3, "체력회복력 "+var);
+        Lore.add("체력회복력 "+var);
         return this;
     }
 
     @Override
     public ItemBuilder setEnergyRegen(int var) {
         if(isZeroValue(var)) return this;
-        Lore.set(3, "에너지회복력 "+var);
+        Lore.add("에너지회복력 "+var);
         return this;
     }
 
     @Override
     public ItemBuilder setWalkSpeed(int var) {
         if(isZeroValue(var)) return this;
-        Lore.set(3, "이동속도 "+var);
+        Lore.add("이동속도 "+var);
         return this;
     }
 

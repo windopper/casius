@@ -2,13 +2,10 @@ package Data;
 
 import Items.Armors.Armors;
 import Items.Weapons.Weapons;
-import org.bukkit.entity.LivingEntity;
-
-import java.util.Set;
 
 public class UpdateCoreData {
 
-    public static void applyCurrentItemData(CoreData coreData) {
+    public static void applyCurrentItemData(PlayerCoreData playerCoreData) {
 
         int health = Constants.DEFAULT_HEALTH.getValue();
         int healthRegen = Constants.DEFAULT_HEALTH_REGEN.getValue();
@@ -28,7 +25,8 @@ public class UpdateCoreData {
         int winddmg = 0;
         int walkSpeed = 0;
 
-        for(Armors armor : coreData.armors) {
+        for(Armors armor : playerCoreData.armors) {
+            if(armor == null) continue;
             health += armor.additionalHealth;
             healthRegen += armor.healthRegen;
             energy += armor.additionalEnergy;
@@ -42,43 +40,44 @@ public class UpdateCoreData {
             walkSpeed += armor.walkSpeed;
         }
 
-        Weapons weapon = coreData.weapon;
+        Weapons weapon = playerCoreData.weapon;
 
-        health += weapon.additionalHealth;
-        healthRegen += weapon.healthRegen;
-        energy += weapon.additionalEnergy;
-        energyRegen = weapon.energyRegen;
-        minIcedmg += weapon.minIcedmg;
-        maxIcedmg += weapon.maxIcedmg;
-        minElecdmg += weapon.minElecdmg;
-        maxElecdmg += weapon.maxElecdmg;
-        minWinddmg += weapon.minWinddmg;
-        maxWinddmg += weapon.maxWinddmg;
-        iceDef += weapon.icedef;
-        elecDef += weapon.elecdef;
-        windDef += weapon.winddef;
-        icedmg += weapon.icedmg;
-        elecdmg += weapon.elecdmg;
-        winddmg += weapon.winddmg;
-        walkSpeed += weapon.walkSpeed;
+        if(weapon != null) {
+            health += weapon.additionalHealth;
+            healthRegen += weapon.healthRegen;
+            energy += weapon.additionalEnergy;
+            energyRegen += weapon.energyRegen;
+            minIcedmg += weapon.minIcedmg;
+            maxIcedmg += weapon.maxIcedmg;
+            minElecdmg += weapon.minElecdmg;
+            maxElecdmg += weapon.maxElecdmg;
+            minWinddmg += weapon.minWinddmg;
+            maxWinddmg += weapon.maxWinddmg;
+            iceDef += weapon.icedef;
+            elecDef += weapon.elecdef;
+            windDef += weapon.winddef;
+            icedmg += weapon.icedmg;
+            elecdmg += weapon.elecdmg;
+            winddmg += weapon.winddmg;
+            walkSpeed += weapon.walkSpeed;
+        }
 
-
-        coreData.health = health;
-        coreData.healthRegen = healthRegen;
-        coreData.energy = energy;
-        coreData.energyRegen = energyRegen;
-        coreData.minIcedmg = minIcedmg;
-        coreData.maxIcedmg = maxIcedmg;
-        coreData.minElecdmg = minElecdmg;
-        coreData.maxElecdmg = maxElecdmg;
-        coreData.minWinddmg = minWinddmg;
-        coreData.maxWinddmg = maxWinddmg;
-        coreData.iceDef = iceDef;
-        coreData.elecDef = elecDef;
-        coreData.windDef = windDef;
-        coreData.iceDmg = icedmg;
-        coreData.elecDmg = elecdmg;
-        coreData.windDmg = winddmg;
-        coreData.walkSpeed = walkSpeed;
+        playerCoreData.health = health;
+        playerCoreData.healthRegen = healthRegen;
+        playerCoreData.energy = energy;
+        playerCoreData.energyRegen = energyRegen;
+        playerCoreData.minIcedmg = minIcedmg;
+        playerCoreData.maxIcedmg = maxIcedmg;
+        playerCoreData.minElecdmg = minElecdmg;
+        playerCoreData.maxElecdmg = maxElecdmg;
+        playerCoreData.minWinddmg = minWinddmg;
+        playerCoreData.maxWinddmg = maxWinddmg;
+        playerCoreData.iceDef = iceDef;
+        playerCoreData.elecDef = elecDef;
+        playerCoreData.windDef = windDef;
+        playerCoreData.iceDmg = icedmg;
+        playerCoreData.elecDmg = elecdmg;
+        playerCoreData.windDmg = winddmg;
+        playerCoreData.walkSpeed = walkSpeed;
     }
 }

@@ -19,7 +19,9 @@ public abstract class Weapons extends Items {
 
     public ItemStack getItem() {
         ItemBuilder itemBuilder = ItemBuilder.getBuilder()
+                .setItemName(Name)
                 .setItemType(itemStack)
+                .enterLine()
                 .setRangeIceDamage(minIcedmg, maxIcedmg)
                 .setRangeElecDamage(minElecdmg, maxElecdmg)
                 .setRangeWindDamage(minWinddmg, maxWinddmg)
@@ -34,7 +36,6 @@ public abstract class Weapons extends Items {
                 .setHealthRegen(healthRegen)
                 .setAdditionalEnergy(additionalEnergy)
                 .setAdditionalHealth(additionalHealth)
-                .setItemName(Name)
                 .setLore(Lore);
 
         return itemBuilder.build();

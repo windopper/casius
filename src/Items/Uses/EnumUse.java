@@ -1,6 +1,6 @@
 package Items.Uses;
 
-import Data.CoreData;
+import Data.PlayerCoreData;
 import Items.IEnumItem;
 import org.bukkit.inventory.ItemStack;
 
@@ -27,12 +27,12 @@ public enum EnumUse implements IEnumItem {
         return useName;
     }
 
-    public void useAbility(CoreData coreData) {
+    public void useAbility(PlayerCoreData playerCoreData) {
         try {
             Class<?> clazz = Class.forName(name());
             Constructor constructor = clazz.getConstructor();
             Method method = clazz.getMethod("mainFunction");
-            method.invoke(constructor.newInstance(), coreData);
+            method.invoke(constructor.newInstance(), playerCoreData);
         }
         catch(Exception e) {
             e.printStackTrace();

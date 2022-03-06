@@ -1,6 +1,6 @@
 package Items.Uses;
 
-import Data.CoreData;
+import Data.PlayerCoreData;
 import Main.main;
 import Utils.ParticleUtil;
 import org.bukkit.Bukkit;
@@ -11,12 +11,12 @@ import org.bukkit.entity.Player;
 public class HealthPotion extends Uses {
 
     @Override
-    protected void mainFunction(CoreData coreData) {
+    protected void mainFunction(PlayerCoreData playerCoreData) {
         Bukkit.getScheduler().runTaskTimer(main.getPlugin(main.class), () -> {
 
-            coreData.addHealth(coreData.health / 5);
+            playerCoreData.addHealth(playerCoreData.health / 5);
 
-            LivingEntity livingEntity = coreData.master;
+            LivingEntity livingEntity = playerCoreData.master;
             Player player = (Player) livingEntity;
 
             ParticleUtil.showParticle(Particle.HEART, player.getEyeLocation(), 1, 0, 0, 0, 0);

@@ -1,7 +1,6 @@
 package Ability;
 
-import Data.Core;
-import Data.CoreData;
+import Data.PlayerCoreData;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 
@@ -13,51 +12,57 @@ public abstract class Ability {
 
     public final AbilitySlot abilitySlot;
 
+    public final String skillName;
     public double fireRadius = 1.5;
     public final double coolDown;
     public final int energyRequire;
 
-    public Ability(AbilitySlot slot, double coolDown, int energyRequire) {
+    public Ability(String skillName, AbilitySlot slot, double coolDown, int energyRequire) {
+        this.skillName = skillName;
         this.abilitySlot = slot;
         this.coolDown = coolDown;
         this.energyRequire = energyRequire;
     }
 
-    public void run(CoreData coreData) {
+    public ResultCode run(PlayerCoreData playerCoreData) {
 
         // 발동 가능 조건 충족하는지 확인
-        checkCondition(coreData);
+        ResultCode condition = checkCondition(playerCoreData);
+        if(condition != ResultCode.SUCCESS) return condition;
 
         // 필요한 자원 사용
-        preInvokeAbility(coreData);
+        preInvokeAbility(playerCoreData);
 
         // 능력 발동
-        invokeAbility(coreData);
+        invokeAbility(playerCoreData);
 
+        return ResultCode.SUCCESS;
     }
 
-    public boolean checkCondition(CoreData coreData) {
+    public ResultCode checkCondition(PlayerCoreData playerCoreData) {
 
-        if(coreData == null) return false;
+        if(playerCoreData == null) return ResultCode.NULL_COREDATA;
 
-        if(coreData.currentEnergy < energyRequire) {
-            return false;
+        if(playerCoreData.currentEnergy < energyRequire) {
+            return ResultCode.ENERGY_SHORTAGE;
         }
-        if(coreData.coolDowns[abilitySlot.ordinal()] > 0) {
-            return false;
+        if(playerCoreData.coolDowns[abilitySlot.ordinal()] > 0) {
+            return ResultCode.ON_COOLDOWN;
         }
-        return true;
+        return ResultCode.SUCCESS;
     }
 
-    public void preInvokeAbility(CoreData coreData) {
-        assert coreData != null;
-        coreData.currentEnergy -= energyRequire;
-        coreData.coolDowns[abilitySlot.ordinal()] = coolDown;
+    public void preInvokeAbility(PlayerCoreData playerCoreData) {
+        assert playerCoreData != null;
+        playerCoreData.currentEnergy -= energyRequire;
+        playerCoreData.coolDowns[abilitySlot.ordinal()] = coolDown;
     }
 
-    public abstract void invokeAbility(CoreData coreData);
+    public abstract void invokeAbility(PlayerCoreData playerCoreData);
 
     public abstract void abilityDesign(Location location);
 
     public abstract void abilityEffect(LivingEntity target);
+
+    public String getSkillName() { return skillName; }
 }

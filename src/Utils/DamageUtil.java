@@ -1,7 +1,9 @@
 package Utils;
 
 import Data.CoreData;
+import Data.PlayerCoreData;
 import Indicates.DamageIndicates;
+import Interacts.Evasions;
 import org.bukkit.entity.LivingEntity;
 
 public class DamageUtil {
@@ -12,14 +14,12 @@ public class DamageUtil {
         LivingEntity master = masterCoreData.master;
         LivingEntity target = targetCoreData.master;
 
-        DamageIndicates damageIndicates = DamageIndicates.getBuilder(target.getEyeLocation());
-
         // 타겟이 회피가 가능하면
-        if(targetCoreData.evasions.size() > 0) {
-            targetCoreData.evasions.remove();
-            damageIndicates.addEvasion().build();
+        if(Evasions.isEvadable(targetCoreData)) {
             return;
         }
+
+        DamageIndicates damageIndicates = DamageIndicates.getBuilder(target.getEyeLocation());
 
         int masterMinIceDamage = masterCoreData.minIcedmg;
         int masterMaxIceDamage = masterCoreData.maxIcedmg;
@@ -54,6 +54,8 @@ public class DamageUtil {
         target.setMaximumNoDamageTicks(1);
         target.setNoDamageTicks(1);
         target.damage(0.0001);
+
+        targetCoreData.currentHealth = targetCoreData.currentHealth - masterFinalWindDamage - masterFinalElecDamage - masterFinalWindDamage;
 
     }
 
