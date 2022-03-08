@@ -9,34 +9,45 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Core {
 
-    private final static ConcurrentHashMap<LivingEntity, PlayerCoreData> Datas = new ConcurrentHashMap<>();
-    private final static ConcurrentHashMap<LivingEntity, ? extends CoreData<? extends LivingEntity>> CoreDatas = new ConcurrentHashMap<>();
+    private final static ConcurrentHashMap<LivingEntity, PlayerCoreData> playerCoreDatas = new ConcurrentHashMap<>();
+    private final static ConcurrentHashMap<LivingEntity, EntityCoreData> entityCoreDatas = new ConcurrentHashMap<>();
 
     public static PlayerCoreData register(Player master) {
         PlayerCoreData newPlayerCoreData = new PlayerCoreData(master);
-        Datas.put(master, newPlayerCoreData);
+        playerCoreDatas.put(master, newPlayerCoreData);
         return newPlayerCoreData;
     }
 
     public static PlayerCoreData getPlayerData(Player master) {
-        if(hasData(master)) return Datas.get(master);
+        if(hasPlayerData(master)) return playerCoreDatas.get(master);
+        return null;
+    }
+
+    public static EntityCoreData getEntityData(LivingEntity master) {
+        if(hasEntityData(master)) return entityCoreDatas.get(master);
         return null;
     }
     
-    public static CoreData getData(LivingEntity master) {
-        if(hasData(master)) return Datas.get(master);
+    public static CoreData<? extends LivingEntity> getData(LivingEntity master) {
+        if(hasPlayerData(master)) return playerCoreDatas.get(master);
+        if(hasEntityData(master)) return entityCoreDatas.get(master);
         return null;
     }
 
     public static Collection<PlayerCoreData> getPlayerDatas() {
-        return Datas.values();
+        return playerCoreDatas.values();
     }
 
-    public static boolean hasData(LivingEntity master) {
-        return Datas.containsKey(master);
+    public static boolean hasPlayerData(LivingEntity master) {
+        return playerCoreDatas.containsKey(master);
     }
 
-    public static void removeData(LivingEntity master) { Datas.remove(master); }
+    public static boolean hasEntityData(LivingEntity master) { return entityCoreDatas.containsKey(master); }
 
-    public static Set<LivingEntity> getRegisteredEntity() { return Datas.keySet(); }
+    public static void removeData(LivingEntity master) { playerCoreDatas.remove(master); }
+
+    public static Set<LivingEntity> getRegisteredEntity() {
+//        Set<LivingEntity> livingEntitySet = Datas.keySet().stream().map(p -> (LivingEntity) p).collect(Collectors.toSet()).addAll(entityCoreDatas.keySet());
+        return playerCoreDatas.keySet();
+    }
 }

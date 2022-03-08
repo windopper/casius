@@ -90,6 +90,8 @@ public class KeyDisplay {
 
     public void updateItemKeyBindsDisplay() {
 
+        if(!isHeldItemHasItemMeta()) return;
+
         COUNT = 0;
         restorationItemInServerBound();
 
@@ -115,6 +117,9 @@ public class KeyDisplay {
     }
 
     public void updateItemDisplayToClientBound(String displayName) {
+
+        if(!isHeldItemHasItemMeta()) return;
+
         COUNT = 0;
         restorationItemInServerBound();
 
@@ -122,5 +127,9 @@ public class KeyDisplay {
         original = player.getInventory().getItemInMainHand();
 
         sendFakeItemToClientBound(slot, displayName);
+    }
+
+    private boolean isHeldItemHasItemMeta() {
+        return player.getInventory().getItemInMainHand().getItemMeta() != null;
     }
 }

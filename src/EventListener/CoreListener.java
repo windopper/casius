@@ -26,8 +26,8 @@ public class CoreListener implements Listener {
 
         if(event.getDamager() instanceof LivingEntity master && event.getEntity() instanceof LivingEntity target) {
 
-            CoreData masterPlayerCoreData = Core.getData(master);
-            CoreData targetPlayerCoreData = Core.getData(target);
+            CoreData<? extends LivingEntity> masterPlayerCoreData = Core.getData(master);
+            CoreData<? extends LivingEntity> targetPlayerCoreData = Core.getData(target);
 
             if(masterPlayerCoreData == null || targetPlayerCoreData == null) return;
 
@@ -81,7 +81,7 @@ public class CoreListener implements Listener {
     @EventHandler
     public void PlayerJoinEvent(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if(Core.hasData(player)) return;
+        if(Core.hasPlayerData(player)) return;
         Core.register(player);
         Bukkit.broadcastMessage(player.getName()+" is registered in coredata successfully");
     }
@@ -89,13 +89,13 @@ public class CoreListener implements Listener {
     @EventHandler
     public void PlayerQuitEvent(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        if(Core.hasData(player)) Core.removeData(player);
+        if(Core.hasPlayerData(player)) Core.removeData(player);
     }
 
     @EventHandler
     public void ServerLoadEvent(ServerLoadEvent event) {
         for(Player player : Bukkit.getOnlinePlayers()) {
-            if(Core.hasData(player)) return;
+            if(Core.hasPlayerData(player)) return;
             Core.register(player);
             Bukkit.broadcastMessage(player.getName()+" is registered in coredata successfully");
         }

@@ -2,6 +2,7 @@ package Ability.Wind;
 
 import Ability.Ability;
 import Ability.AbilitySlot;
+import Data.CoreData;
 import Data.PlayerCoreData;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
@@ -33,7 +34,7 @@ public class TrustingWind extends Ability {
     }
 
     @Override
-    public void abilityEffect(LivingEntity target) {
+    public void abilityEffect(CoreData<? extends LivingEntity> targetCoreData) {
 
     }
 }

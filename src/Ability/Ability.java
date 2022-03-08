@@ -1,5 +1,6 @@
 package Ability;
 
+import Data.CoreData;
 import Data.PlayerCoreData;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
@@ -62,7 +63,7 @@ public abstract class Ability {
 
     public abstract void abilityDesign(Location location);
 
-    public abstract void abilityEffect(LivingEntity target);
+    public abstract void abilityEffect(CoreData<? extends LivingEntity> targetCoreData);
 
     public String getSkillName() { return skillName; }
 }

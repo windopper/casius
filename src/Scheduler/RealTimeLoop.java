@@ -1,6 +1,9 @@
 package Scheduler;
 
+import Ability.Ability;
 import Data.PlayerCoreData;
+import KeyBinds.KeyDisplay;
+import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
@@ -62,10 +65,26 @@ public class RealTimeLoop {
     // 2틱마다 한번
     public void updateCoolDown(PlayerCoreData playerCoreData) {
         if(playerCoreData == null) return;
+        Player master = playerCoreData.master;
 
         for(int i = 0; i< playerCoreData.coolDowns.length; i++) {
             double C = playerCoreData.coolDowns[i];
-            if(C - 0.1 < 0) playerCoreData.coolDowns[i] = 0;
+
+            if(C - 0.2 < 0 && C - 0.1 >= 0) {
+                Ability ability = playerCoreData.abilities[i];
+                if(ability == null) continue;
+                try {
+                    master.playSound(master.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
+                    KeyDisplay.getInstance(playerCoreData).updateItemDisplayToClientBound("§a"+ability.getSkillName()+" 사용 가능");
+                }
+                catch(Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if(C - 0.1 < 0) {
+                playerCoreData.coolDowns[i] = 0;
+            }
             else playerCoreData.coolDowns[i] -= 0.1;
         }
     }

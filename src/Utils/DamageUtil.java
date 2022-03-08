@@ -1,18 +1,22 @@
 package Utils;
 
 import Data.CoreData;
-import Data.PlayerCoreData;
 import Indicates.DamageIndicates;
 import Interacts.Evasions;
+import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
 
 public class DamageUtil {
 
-    public static void giveDamage(CoreData masterCoreData, CoreData targetCoreData, double iceDamageRate,
+    public static void giveDamage(CoreData<? extends LivingEntity> masterCoreData, CoreData<? extends LivingEntity> targetCoreData, double iceDamageRate,
                                   double elecDamageRate, double windDamageRate) {
 
         LivingEntity master = masterCoreData.master;
         LivingEntity target = targetCoreData.master;
+
+        if(masterCoreData.isInvulnerable) return;
+        if(targetCoreData.isInvulnerable) return;
 
         // 타겟이 회피가 가능하면
         if(Evasions.isEvadable(targetCoreData)) {
@@ -20,6 +24,8 @@ public class DamageUtil {
         }
 
         DamageIndicates damageIndicates = DamageIndicates.getBuilder(target.getEyeLocation());
+
+
 
         int masterMinIceDamage = masterCoreData.minIcedmg;
         int masterMaxIceDamage = masterCoreData.maxIcedmg;
@@ -34,16 +40,19 @@ public class DamageUtil {
         int targetElecDefenseVar = targetCoreData.elecDef;
         int targetWindDefenseVar = targetCoreData.windDef;
 
+        double tempDamageTakenModfRate = targetCoreData.getRateTempDamageTakenModf();
+        double tempDamageGivenModfRate = masterCoreData.getRateTempDamageGivenModf();
+
         int masterRandomIceDamage = NumberUtil.randomInt(masterMinIceDamage, masterMaxIceDamage);
         int masterRandomElecDamage = NumberUtil.randomInt(masterMinElecDamage, masterMaxElecDamage);
         int masterRandomWindDamage = NumberUtil.randomInt(masterMinWindDamage, masterMaxWindDamage);
 
         int masterFinalIceDamage = (int) (damageCalculate(masterRandomIceDamage, masterIceDamageVar, targetIceDefenseVar) *
-                        iceDamageRate);
+                        iceDamageRate * tempDamageTakenModfRate * tempDamageGivenModfRate);
         int masterFinalElecDamage = (int) (damageCalculate(masterRandomElecDamage, masterElecDamageVar, targetElecDefenseVar) *
-                        elecDamageRate);
+                        elecDamageRate * tempDamageTakenModfRate * tempDamageGivenModfRate);
         int masterFinalWindDamage = (int) (damageCalculate(masterRandomWindDamage, masterWindDamageVar, targetWindDefenseVar) *
-                        windDamageRate);
+                        windDamageRate * tempDamageTakenModfRate * tempDamageGivenModfRate);
 
 
         if(masterFinalIceDamage != 0) damageIndicates.addIceDamage(masterFinalIceDamage);
@@ -52,14 +61,16 @@ public class DamageUtil {
         damageIndicates.build();
 
         target.setMaximumNoDamageTicks(1);
-        target.setNoDamageTicks(1);
+        target.setNoDamageTicks(0);
         target.damage(0.0001);
+
+        ParticleUtil.showParticle(Particle.BLOCK_CRACK, target.getLocation().add(0, 1, 0), 20, 0.5, 0.5, 0.5, 0, Material.REDSTONE_BLOCK.createBlockData());
 
         targetCoreData.currentHealth = targetCoreData.currentHealth - masterFinalWindDamage - masterFinalElecDamage - masterFinalWindDamage;
 
     }
 
-    public static void giveDamage(CoreData masterCoreData, CoreData targetCoreData, double damageRate) {
+    public static void giveDamage(CoreData<? extends LivingEntity> masterCoreData, CoreData<? extends LivingEntity> targetCoreData, double damageRate) {
         giveDamage(masterCoreData, targetCoreData, damageRate, damageRate, damageRate);
     }
 

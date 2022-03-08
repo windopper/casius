@@ -1,6 +1,8 @@
 package Commands;
 
 import Ability.Ability;
+import Ability.Elec.EnumElecAbility;
+import Ability.Ice.EnumIceAbility;
 import Ability.Wind.EnumWindAbility;
 import Data.Core;
 import Data.PlayerCoreData;
@@ -19,6 +21,8 @@ public class SkillCommands {
                     String skillName = args[1];
                     Ability ability = null;
                     if(Enums.getIfPresent(EnumWindAbility.class, skillName).isPresent()) ability = EnumWindAbility.valueOf(skillName).getSkill();
+                    else if(Enums.getIfPresent(EnumElecAbility.class, skillName).isPresent()) ability = EnumElecAbility.valueOf(skillName).getSkill();
+                    else if(Enums.getIfPresent(EnumIceAbility.class, skillName).isPresent()) ability = EnumIceAbility.valueOf(skillName).getSkill();
                     else {
                         master.sendMessage("스킬 "+skillName+" 이 존재하지 않습니다");
                     }

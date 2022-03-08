@@ -3,6 +3,7 @@ package Ability.Ice;
 import Ability.Ability;
 import Ability.AbilitySlot;
 import Ability.Damageable;
+import Data.CoreData;
 import Data.PlayerCoreData;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
@@ -29,7 +30,7 @@ public class IceLance extends Ability implements Damageable {
     }
 
     @Override
-    public void abilityEffect(LivingEntity target) {
+    public void abilityEffect(CoreData<? extends LivingEntity> targetCoreData) {
 
     }
 

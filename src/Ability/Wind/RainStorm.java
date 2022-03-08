@@ -3,6 +3,7 @@ package Ability.Wind;
 import Ability.Ability;
 import Ability.AbilitySlot;
 import Data.Core;
+import Data.CoreData;
 import Data.PlayerCoreData;
 import Main.main;
 import Utils.ParticleUtil;
@@ -97,7 +98,7 @@ public class RainStorm extends Ability {
     }
 
     @Override
-    public void abilityEffect(LivingEntity target) {
+    public void abilityEffect(CoreData<? extends LivingEntity> targetCoreData) {
 
     }
 }
