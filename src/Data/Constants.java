@@ -6,7 +6,9 @@ public enum Constants {
     DEFAULT_ENERGY(200),
     DEFAULT_HEALTH_REGEN(10),
     DEFAULT_ENERGY_REGEN(5),
-    KEY_WAIT(20);
+    KEY_WAIT(20),
+    DEFAULT_RESPAWN_TIME(10),
+    ;
 
     final int var;
 

@@ -2,12 +2,16 @@ package Utils;
 
 import Data.Core;
 import Data.PlayerCoreData;
+import Main.main;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.craftbukkit.libs.org.eclipse.sisu.Nullable;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+
+import java.util.function.Consumer;
 
 public class ParticleUtil {
 
@@ -43,5 +47,42 @@ public class ParticleUtil {
             v = v.rotateAroundY(i);
             showParticle(var1, var2.clone().add(v), amount, delX, delY, delZ, velocity, var3);
         }
+    }
+
+    public static <T> void bladeShape(Particle particle, Location loc, double yaw, double pitch, double roll, int angle,
+                                      double angleStride, double minDist, double maxDist, double distStride,
+                                      int time, boolean clockwise, @Nullable Consumer<Location> consumer, @Nullable T particleOption) {
+
+        final double schedulerStride = (double)angle / (double)time / angleStride;
+
+        new BukkitRunnable() {
+
+            double rYaw = Math.toRadians(yaw);
+            double rPitch = Math.toRadians(pitch);
+            double rRoll = Math.toRadians(roll);
+            int count = 0;
+            double startAngle = clockwise ? -(double)angle / 2 : (double)angle / 2;
+            final double addAngle = clockwise ? angleStride : -angleStride;
+
+            @Override
+            public void run() {
+
+                for(int i=0; i<schedulerStride; i++) {
+                    for(double j = minDist; j<maxDist; j+=distStride) {
+                        Vector v = new Vector(0, 0, j);
+                        v.rotateAroundY(Math.toRadians(startAngle));
+                        RotateUtil.transform(v, rYaw, rPitch, rRoll);
+                        loc.add(v);
+                        showParticle(particle, loc, 1, 0, 0, 0, 0, particleOption);
+                        if(consumer != null) consumer.accept(loc);
+                        loc.subtract(v);
+                    }
+                    startAngle += addAngle;
+                }
+
+                if(count >= time) cancel();
+                count++;
+            }
+        }.runTaskTimer(main.getPlugin(main.class), 0, 1);
     }
 }

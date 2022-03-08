@@ -3,6 +3,8 @@ package Main;
 import Commands.ItemCommands;
 import Commands.SkillCommands;
 import EventListener.CoreListener;
+import EventListener.PacketListener;
+import EventListener.ProjectileListener;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -13,6 +15,8 @@ public class main extends JavaPlugin {
     @Override
     public void onEnable() {
         Bukkit.getPluginManager().registerEvents(new CoreListener() ,this);
+        Bukkit.getPluginManager().registerEvents(new ProjectileListener(), this);
+//        Bukkit.getPluginManager().registerEvents(new PacketListener(), this);
 
         init();
     }
@@ -35,7 +39,6 @@ public class main extends JavaPlugin {
 
         ItemCommands.Listen(player, cmdName, args);
         SkillCommands.Listen(player, cmdName, args);
-
 
 
         return true;

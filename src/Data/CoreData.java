@@ -48,6 +48,9 @@ public class CoreData<T extends LivingEntity> {
     public boolean isInvulnerable = false; // 피해를 받거나 줄 수 있는 상태. TRUE이면 그 반대
     public boolean unstoppable = false; // 저지불가
 
+    /** RECORDS */
+    public ConcurrentLinkedQueue<DamageRecord> takenDamages = new ConcurrentLinkedQueue<>();
+
     public CoreData(T master) {
         this.master = master;
     }

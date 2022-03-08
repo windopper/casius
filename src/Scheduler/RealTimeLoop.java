@@ -2,6 +2,7 @@ package Scheduler;
 
 import Ability.Ability;
 import Data.PlayerCoreData;
+import Interacts.Death;
 import KeyBinds.KeyDisplay;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
@@ -33,13 +34,16 @@ public class RealTimeLoop {
 
         double currentHealth = playerCoreData.currentHealth;
         double health = playerCoreData.health;
+        boolean onDeath = playerCoreData.onDeath;
 
-        if(currentHealth <= 0) {
-
-        } else if(currentHealth <= health) {
-            entity.setHealth(currentHealth / health * entity.getMaxHealth());
-        } else {
-            entity.setHealth(entity.getMaxHealth());
+        if(!onDeath) {
+            if(currentHealth <= 0) {
+                (new Death()).enableDeathState(playerCoreData);
+            } else if(currentHealth <= health) {
+                entity.setHealth(currentHealth / health * entity.getMaxHealth());
+            } else {
+                entity.setHealth(entity.getMaxHealth());
+            }
         }
     }
 

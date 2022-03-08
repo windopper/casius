@@ -25,8 +25,6 @@ public class DamageUtil {
 
         DamageIndicates damageIndicates = DamageIndicates.getBuilder(target.getEyeLocation());
 
-
-
         int masterMinIceDamage = masterCoreData.minIcedmg;
         int masterMaxIceDamage = masterCoreData.maxIcedmg;
         int masterMinElecDamage = masterCoreData.minElecdmg;
@@ -66,7 +64,7 @@ public class DamageUtil {
 
         ParticleUtil.showParticle(Particle.BLOCK_CRACK, target.getLocation().add(0, 1, 0), 20, 0.5, 0.5, 0.5, 0, Material.REDSTONE_BLOCK.createBlockData());
 
-        targetCoreData.currentHealth = targetCoreData.currentHealth - masterFinalWindDamage - masterFinalElecDamage - masterFinalWindDamage;
+        targetCoreData.currentHealth = targetCoreData.currentHealth - masterFinalWindDamage - masterFinalElecDamage - masterFinalIceDamage;
 
     }
 

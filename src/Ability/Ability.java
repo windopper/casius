@@ -7,25 +7,27 @@ import org.bukkit.entity.LivingEntity;
 
 public abstract class Ability {
 
-    public int elecDmg = 0;
-    public int iceDmg = 0;
-    public int windDmg = 0;
-
     public final AbilitySlot abilitySlot;
 
     public final String skillName;
     public double fireRadius = 1.5;
     public final double coolDown;
     public final int energyRequire;
+    protected double manipulatedCoolDown;
+    protected int manipulatedEnergyRequire;
 
     public Ability(String skillName, AbilitySlot slot, double coolDown, int energyRequire) {
         this.skillName = skillName;
         this.abilitySlot = slot;
         this.coolDown = coolDown;
         this.energyRequire = energyRequire;
+        this.manipulatedCoolDown = coolDown;
+        this.manipulatedEnergyRequire = energyRequire;
     }
 
     public ResultCode run(PlayerCoreData playerCoreData) {
+
+        init(playerCoreData);
 
         // 발동 가능 조건 충족하는지 확인
         ResultCode condition = checkCondition(playerCoreData);
@@ -44,7 +46,7 @@ public abstract class Ability {
 
         if(playerCoreData == null) return ResultCode.NULL_COREDATA;
 
-        if(playerCoreData.currentEnergy < energyRequire) {
+        if(playerCoreData.currentEnergy < manipulatedEnergyRequire) {
             return ResultCode.ENERGY_SHORTAGE;
         }
         if(playerCoreData.coolDowns[abilitySlot.ordinal()] > 0) {
@@ -56,7 +58,13 @@ public abstract class Ability {
     public void preInvokeAbility(PlayerCoreData playerCoreData) {
         assert playerCoreData != null;
         playerCoreData.currentEnergy -= energyRequire;
-        playerCoreData.coolDowns[abilitySlot.ordinal()] = coolDown;
+        playerCoreData.coolDowns[abilitySlot.ordinal()] = manipulatedCoolDown;
+    }
+
+    public void init(PlayerCoreData playerCoreData) {
+        /* 변수 조작이 필요할 때*/
+        manipulatedCoolDown = coolDown;
+        manipulatedEnergyRequire = energyRequire;
     }
 
     public abstract void invokeAbility(PlayerCoreData playerCoreData);

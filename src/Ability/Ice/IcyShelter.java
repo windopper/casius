@@ -73,6 +73,7 @@ public class IcyShelter extends Ability {
                             for(CoreData<? extends LivingEntity> targetCoreData : AbilityHelper.getValidEntitiesInRadius(radius, finalLoc, master)) {
                                 targetCoreData.setTempDamageGivenModf("IcyShelter", -20, 100);
                             }
+
                             if(count >= 9) cancel();
                             count++;
                         }

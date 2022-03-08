@@ -33,7 +33,7 @@ public class PlayerCoreData extends CoreData<Player> {
 
 
     /** CONFIGURATIONS */
-    public boolean pvpMode = true;
+    public boolean onDeath = false;
     public boolean showParticle = true;
     public Set<Player> nearbyRainStorms = new HashSet<>();
 

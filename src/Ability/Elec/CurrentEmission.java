@@ -9,6 +9,7 @@ import Main.main;
 import Utils.DamageUtil;
 import Utils.ParticleUtil;
 import Utils.RotateUtil;
+import Utils.SoundUtil;
 import org.bukkit.*;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -62,7 +63,7 @@ public class CurrentEmission extends Ability {
 
     @Override
     public void abilityDesign(Location location) {
-        location.getWorld().playSound(location, Sound.ENTITY_FIREWORK_ROCKET_TWINKLE, 2f, 1.8f);
+        SoundUtil.playSound(location, Sound.ENTITY_FIREWORK_ROCKET_TWINKLE, 2f, 1.8f);
     }
 
     @Override
