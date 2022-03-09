@@ -1,16 +1,24 @@
 package Utils;
 
 import Data.CoreData;
+import Data.DamageRecord;
+import Data.PlayerCoreData;
 import Indicates.DamageIndicates;
 import Interacts.Evasions;
+import Mission.MissionPlayerKill;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
 
-public class DamageUtil {
+public class DamageUtils {
 
     public static void giveDamage(CoreData<? extends LivingEntity> masterCoreData, CoreData<? extends LivingEntity> targetCoreData, double iceDamageRate,
                                   double elecDamageRate, double windDamageRate) {
+        giveDamage(masterCoreData, targetCoreData, iceDamageRate, elecDamageRate, windDamageRate, "Natural");
+    }
+
+    public static void giveDamage(CoreData<? extends LivingEntity> masterCoreData, CoreData<? extends LivingEntity> targetCoreData, double iceDamageRate,
+                                  double elecDamageRate, double windDamageRate, String causeElement) {
 
         LivingEntity master = masterCoreData.master;
         LivingEntity target = targetCoreData.master;
@@ -41,9 +49,9 @@ public class DamageUtil {
         double tempDamageTakenModfRate = targetCoreData.getRateTempDamageTakenModf();
         double tempDamageGivenModfRate = masterCoreData.getRateTempDamageGivenModf();
 
-        int masterRandomIceDamage = NumberUtil.randomInt(masterMinIceDamage, masterMaxIceDamage);
-        int masterRandomElecDamage = NumberUtil.randomInt(masterMinElecDamage, masterMaxElecDamage);
-        int masterRandomWindDamage = NumberUtil.randomInt(masterMinWindDamage, masterMaxWindDamage);
+        int masterRandomIceDamage = NumberUtils.randomInt(masterMinIceDamage, masterMaxIceDamage);
+        int masterRandomElecDamage = NumberUtils.randomInt(masterMinElecDamage, masterMaxElecDamage);
+        int masterRandomWindDamage = NumberUtils.randomInt(masterMinWindDamage, masterMaxWindDamage);
 
         int masterFinalIceDamage = (int) (damageCalculate(masterRandomIceDamage, masterIceDamageVar, targetIceDefenseVar) *
                         iceDamageRate * tempDamageTakenModfRate * tempDamageGivenModfRate);
@@ -62,10 +70,17 @@ public class DamageUtil {
         target.setNoDamageTicks(0);
         target.damage(0.0001);
 
-        ParticleUtil.showParticle(Particle.BLOCK_CRACK, target.getLocation().add(0, 1, 0), 20, 0.5, 0.5, 0.5, 0, Material.REDSTONE_BLOCK.createBlockData());
+        ParticleUtils.showParticle(Particle.BLOCK_CRACK, target.getLocation().add(0, 1, 0), 20, 0.5, 0.5, 0.5, 0, Material.REDSTONE_BLOCK.createBlockData());
 
         targetCoreData.currentHealth = targetCoreData.currentHealth - masterFinalWindDamage - masterFinalElecDamage - masterFinalIceDamage;
 
+        /** MISSION */
+        if(targetCoreData.currentHealth <= 0 && masterCoreData instanceof PlayerCoreData playerCoreData && playerCoreData.privateMission instanceof MissionPlayerKill missionPlayerKill) {
+            missionPlayerKill.updateMission();
+        }
+
+        /** RECORD */
+        targetCoreData.takenDamages.add(new DamageRecord(master.getName(), causeElement, System.currentTimeMillis(), masterFinalWindDamage + masterFinalElecDamage + masterFinalIceDamage));
     }
 
     public static void giveDamage(CoreData<? extends LivingEntity> masterCoreData, CoreData<? extends LivingEntity> targetCoreData, double damageRate) {

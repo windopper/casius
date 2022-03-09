@@ -5,10 +5,10 @@ import Ability.AbilityHelper;
 import Ability.AbilitySlot;
 import Data.CoreData;
 import Data.PlayerCoreData;
-import Utils.DamageUtil;
-import Utils.NumberUtil;
-import Utils.ParticleUtil;
-import Utils.SoundUtil;
+import Utils.DamageUtils;
+import Utils.NumberUtils;
+import Utils.ParticleUtils;
+import Utils.SoundUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -46,16 +46,16 @@ public class GlacialBlade extends Ability {
         final Player master = playerCoreData.master;
         final Location loc = master.getEyeLocation().add(0, -0.5, 0);
 
-        SoundUtil.playSound(loc, Sound.BLOCK_GLASS_BREAK, 1, 0.5f);
-        SoundUtil.playSound(loc, Sound.ENTITY_PLAYER_ATTACK_SWEEP, 1, 1);
+        SoundUtils.playSound(loc, Sound.BLOCK_GLASS_BREAK, 1, 0.5f);
+        SoundUtils.playSound(loc, Sound.ENTITY_PLAYER_ATTACK_SWEEP, 1, 1);
 
-        ParticleUtil.bladeShape(Particle.BLOCK_CRACK, loc, loc.getYaw(), loc.getPitch(), NumberUtil.randomDouble(-30, 30), 120, 5,
+        ParticleUtils.bladeShape(Particle.BLOCK_CRACK, loc, loc.getYaw(), loc.getPitch(), NumberUtils.randomDouble(-30, 30), 120, 5,
                 2, 6, 0.4, 4, true,
                 (l) -> {
-                    ParticleUtil.showParticle(Particle.SNOWFLAKE, l, 1, 0, 0, 0, 0);
+                    ParticleUtils.showParticle(Particle.SNOWFLAKE, l, 1, 0, 0, 0, 0);
                     for(CoreData<? extends LivingEntity> targetCoreData : AbilityHelper.getValidEntitiesInRadiusWithBoundingBox(2, l, master)) {
                         if(hit.contains(targetCoreData)) continue;
-                        DamageUtil.giveDamage(playerCoreData, targetCoreData, 2, 0, 0);
+                        DamageUtils.giveDamage(playerCoreData, targetCoreData, 2, 0, 0, EnumIceAbility.GlacialBlade.name());
                         hit.add(targetCoreData);
                     }
                 },

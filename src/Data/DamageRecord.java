@@ -1,8 +1,9 @@
 package Data;
 
 public record DamageRecord(
-        String causeName,
-        String Name,
+        String causeEntityName,
+        String causeElementName,
+        long time,
         int Damage
 ) {
 

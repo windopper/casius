@@ -7,7 +7,7 @@ import Helper.ItemHelper;
 import Interacts.Evasions;
 import KeyBinds.KeyEvents;
 import KeyBinds.Keys;
-import Utils.DamageUtil;
+import Utils.DamageUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -36,7 +36,7 @@ public class CoreListener implements Listener {
                 return;
             }
 
-            DamageUtil.giveDamage(masterPlayerCoreData, targetPlayerCoreData, 1);
+            DamageUtils.giveDamage(masterPlayerCoreData, targetPlayerCoreData, 1, 1, 1, "Melee");
 
         }
     }

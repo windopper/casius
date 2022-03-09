@@ -2,6 +2,7 @@ package Interacts;
 
 import Data.Constants;
 import Data.PlayerCoreData;
+import Data.TakenDamageAnalysis;
 import Main.main;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
@@ -23,6 +24,7 @@ public class Death {
         playerCoreData.isInvulnerable = true;
 
         Player master = playerCoreData.master;
+        (new TakenDamageAnalysis(playerCoreData)).sendResult(master, 10000);
         master.setGameMode(GameMode.SPECTATOR);
 
         new BukkitRunnable() {

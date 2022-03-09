@@ -4,10 +4,10 @@ import Ability.Ability;
 import Data.PlayerCoreData;
 import Interacts.Death;
 import KeyBinds.KeyDisplay;
+import Utils.SpeedUtils;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-
 
 public class RealTimeLoop {
 
@@ -59,11 +59,7 @@ public class RealTimeLoop {
             if(currentEnergy <= energy && currentEnergy >= 0) {
                 player.setFoodLevel((int) (currentEnergy / energy * 20));
             }
-
-
         }
-
-
     }
 
     // 2틱마다 한번
@@ -98,5 +94,11 @@ public class RealTimeLoop {
         if(playerCoreData == null) return;
         playerCoreData.addEnergy(playerCoreData.energyRegen);
         playerCoreData.addHealth(playerCoreData.healthRegen);
+    }
+
+    public void updateWalkSpeed(PlayerCoreData playerCoreData) {
+        if(playerCoreData == null) return;
+        Player master = playerCoreData.master;
+        SpeedUtils.setWalkSpeed(master, SpeedUtils.transformWalkSpeedToFloat(playerCoreData.walkSpeed));
     }
 }

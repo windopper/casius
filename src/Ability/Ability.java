@@ -57,7 +57,7 @@ public abstract class Ability {
 
     public void preInvokeAbility(PlayerCoreData playerCoreData) {
         assert playerCoreData != null;
-        playerCoreData.currentEnergy -= energyRequire;
+        playerCoreData.currentEnergy -= manipulatedEnergyRequire;
         playerCoreData.coolDowns[abilitySlot.ordinal()] = manipulatedCoolDown;
     }
 

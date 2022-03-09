@@ -2,7 +2,7 @@ package Items.Uses;
 
 import Data.PlayerCoreData;
 import Main.main;
-import Utils.ParticleUtil;
+import Utils.ParticleUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
@@ -19,7 +19,7 @@ public class HealthPotion extends Uses {
             LivingEntity livingEntity = playerCoreData.master;
             Player player = (Player) livingEntity;
 
-            ParticleUtil.showParticle(Particle.HEART, player.getEyeLocation(), 1, 0, 0, 0, 0);
+            ParticleUtils.showParticle(Particle.HEART, player.getEyeLocation(), 1, 0, 0, 0, 0);
 
         }, 0, 20);
     }

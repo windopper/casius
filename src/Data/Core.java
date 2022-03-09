@@ -3,7 +3,9 @@ package Data;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -36,6 +38,14 @@ public class Core {
 
     public static Collection<PlayerCoreData> getPlayerDatas() {
         return playerCoreDatas.values();
+    }
+
+    public static Collection<CoreData<? extends LivingEntity>> getDatas() {
+        List<PlayerCoreData> l_pcd = playerCoreDatas.values().stream().toList();
+        List<EntityCoreData> l_ecd = entityCoreDatas.values().stream().toList();
+        List<CoreData<? extends LivingEntity>> l_cd = new ArrayList<>(l_pcd);
+        l_cd.addAll(l_ecd);
+        return l_cd;
     }
 
     public static boolean hasPlayerData(LivingEntity master) {

@@ -2,7 +2,7 @@ package Utils;
 
 import org.bukkit.util.Vector;
 
-public class RotateUtil {
+public class RotateUtils {
     public static Vector rotateAroundAxisX(Vector v, double cos, double sin) {
         double y = v.getY() * cos - v.getZ() * sin;
         double z = v.getY() * sin + v.getZ() * cos;

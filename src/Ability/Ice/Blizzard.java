@@ -6,8 +6,7 @@ import Ability.Shootable;
 import Data.CoreData;
 import Data.PlayerCoreData;
 import Main.main;
-import Utils.DamageUtil;
-import Utils.NumberUtil;
+import Utils.NumberUtils;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -37,9 +36,9 @@ public class Blizzard extends Ability implements Shootable {
             public void run() {
 
                 Vector v = master.getLocation().getDirection().clone().normalize().multiply(1.3);
-                v.setX(v.getX() * NumberUtil.randomDouble(min, max));
-                v.setY(v.getY() * NumberUtil.randomDouble(min, max));
-                v.setZ(v.getZ() * NumberUtil.randomDouble(min, max));
+                v.setX(v.getX() * NumberUtils.randomDouble(min, max));
+                v.setY(v.getY() * NumberUtils.randomDouble(min, max));
+                v.setZ(v.getZ() * NumberUtils.randomDouble(min, max));
 
                 for(int i=0; i<7; i++) {
                     Snowball snowball = (Snowball) master.getWorld().spawnEntity(master.getEyeLocation(), EntityType.SNOWBALL);

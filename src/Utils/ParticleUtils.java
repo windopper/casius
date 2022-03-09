@@ -13,7 +13,7 @@ import org.bukkit.util.Vector;
 
 import java.util.function.Consumer;
 
-public class ParticleUtil {
+public class ParticleUtils {
 
     public static void showParticle(Particle var1, Location var2, int var3, double var4, double var5, double var6, double var7) {
         showParticle(var1, var2, var3, var4, var5, var6, var7, null);
@@ -33,11 +33,43 @@ public class ParticleUtil {
         }
     }
 
-    public static <T> void scatterCircle(Particle var1, Location var2, double radius, int stride, double velocity, @Nullable T var6) {
+    public static <T> void scatterAxisYCircle(Particle var1, Location var2, double radius, int stride, double velocity, @Nullable T var6) {
         for(double i = 0; i<360; i += stride) {
             Vector v = new Vector(0, 0, radius);
             v = v.rotateAroundY(i);
             showParticle(var1, var2, 0, v.getX(), v.getY(), v.getZ(), velocity, var6);
+        }
+    }
+
+    public static <T> void scatterAxisXCircle(Particle var1, Location var2, double radius, int stride, double velocity, @Nullable T var6) {
+        for(double i = 0; i<360; i += stride) {
+            Vector v = new Vector(0, radius, 0);
+            v = v.rotateAroundX(i);
+            showParticle(var1, var2, 0, v.getX(), v.getY(), v.getZ(), velocity, var6);
+        }
+    }
+
+    public static <T> void scatterAxisZCircle(Particle var1, Location var2, double radius, int stride, double velocity, @Nullable T var6) {
+        for(double i = 0; i<360; i += stride) {
+            Vector v = new Vector(0, radius, 0);
+            v = v.rotateAroundZ(i);
+            showParticle(var1, var2, 0, v.getX(), v.getY(), v.getZ(), velocity, var6);
+        }
+    }
+
+    public static <T> void scatterAxisCircle(Particle var1, Location var2, double radius, int stride, double velocity, Vector axis, @Nullable T var6) {
+        for(double i = 0; i<360; i += stride) {
+            Vector v = new Vector(0, 0, radius);
+            v = v.rotateAroundAxis(axis, i);
+            showParticle(var1, var2, 0, v.getX(), v.getY(), v.getZ(), velocity, var6);
+        }
+    }
+
+    public static <T> void convergeAxisCircle(Particle var1, Location var2, double radius, int stride, double velocity, Vector axis, @Nullable T var6) {
+        for(double i = 0; i<360; i += stride) {
+            Vector v = new Vector(0, 0, radius);
+            v = v.rotateAroundAxis(axis, i);
+            showParticle(var1, var2.clone().add(v), 0, -v.getX(), -v.getY(), -v.getZ(), velocity, var6);
         }
     }
 
@@ -50,8 +82,8 @@ public class ParticleUtil {
     }
 
     public static <T> void bladeShape(Particle particle, Location loc, double yaw, double pitch, double roll, int angle,
-                                      double angleStride, double minDist, double maxDist, double distStride,
-                                      int time, boolean clockwise, @Nullable Consumer<Location> consumer, @Nullable T particleOption) {
+                                      double angleStride, double minDist, double maxDist, double distStride, int time,
+                                      boolean clockwise, @Nullable Consumer<Location> consumer, @Nullable T particleOption) {
 
         final double schedulerStride = (double)angle / (double)time / angleStride;
 
@@ -71,7 +103,7 @@ public class ParticleUtil {
                     for(double j = minDist; j<maxDist; j+=distStride) {
                         Vector v = new Vector(0, 0, j);
                         v.rotateAroundY(Math.toRadians(startAngle));
-                        RotateUtil.transform(v, rYaw, rPitch, rRoll);
+                        RotateUtils.transform(v, rYaw, rPitch, rRoll);
                         loc.add(v);
                         showParticle(particle, loc, 1, 0, 0, 0, 0, particleOption);
                         if(consumer != null) consumer.accept(loc);

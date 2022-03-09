@@ -4,6 +4,7 @@ import Data.Core;
 import Data.CoreData;
 import Data.PlayerCoreData;
 import org.bukkit.Location;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.BoundingBox;
@@ -21,11 +22,14 @@ public class AbilityHelper {
 
         for(LivingEntity livingEntity : Objects.requireNonNull(location.getWorld()).getLivingEntities()) {
             Location targetLoc = livingEntity.getEyeLocation();
+
             if(livingEntity == master) continue;
+            if(livingEntity instanceof ArmorStand) continue;
             if(location.distance(targetLoc) > radius) continue;
 
             CoreData<? extends LivingEntity> targetData = Core.getData(livingEntity);
             if(targetData == null) continue;
+            if(targetCoreDatas.contains(targetData)) continue;
             if(targetData.isInvulnerable) continue;
 
             targetCoreDatas.add(targetData);
@@ -45,10 +49,12 @@ public class AbilityHelper {
             BoundingBox box = livingEntity.getBoundingBox();
             Location targetLoc = livingEntity.getEyeLocation();
             if(livingEntity == master) continue;
+            if(livingEntity instanceof ArmorStand) continue;
             if(location.distance(targetLoc) > radius && !box.contains(location.getX(), location.getY(), location.getZ())) continue;
 
             CoreData<? extends LivingEntity> targetData = Core.getData(livingEntity);
             if(targetData == null) continue;
+            if(targetCoreDatas.contains(targetData)) continue;
             if(targetData.isInvulnerable) continue;
 
             targetCoreDatas.add(targetData);
@@ -64,6 +70,7 @@ public class AbilityHelper {
         if(masterData.isInvulnerable) return targetCoreDatas;
 
         for(PlayerCoreData coreData : Core.getPlayerDatas()) {
+            if(targetCoreDatas.contains(coreData)) continue;
             Player target = coreData.master;
             if(target == master) continue;
             if(coreData.isInvulnerable) continue;

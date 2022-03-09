@@ -1,9 +1,9 @@
 package Main;
 
+import Commands.GameCommands;
 import Commands.ItemCommands;
 import Commands.SkillCommands;
 import EventListener.CoreListener;
-import EventListener.PacketListener;
 import EventListener.ProjectileListener;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -39,6 +39,7 @@ public class main extends JavaPlugin {
 
         ItemCommands.Listen(player, cmdName, args);
         SkillCommands.Listen(player, cmdName, args);
+        GameCommands.Listen(player, cmdName, args);
 
 
         return true;

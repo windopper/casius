@@ -6,8 +6,8 @@ import Ability.AbilityHelper;
 import Data.CoreData;
 import Data.PlayerCoreData;
 import Main.main;
-import Utils.ParticleUtil;
-import Utils.SoundUtil;
+import Utils.ParticleUtils;
+import Utils.SoundUtils;
 import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -17,7 +17,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 import java.util.*;
@@ -56,7 +55,7 @@ public class IcyShelter extends Ability {
             @Override
             public void run() {
                 Location itemLoc = item.getLocation();
-                ParticleUtil.showParticle(Particle.FIREWORKS_SPARK, itemLoc, 2, 0, 0, 0, 0.5);
+                ParticleUtils.showParticle(Particle.FIREWORKS_SPARK, itemLoc, 2, 0, 0, 0, 0.5);
 
                 if(count >= 10) {
 
@@ -91,7 +90,7 @@ public class IcyShelter extends Ability {
 
     @Override
     public void abilityDesign(Location location) {
-        SoundUtil.playSound(location, Sound.BLOCK_GLASS_BREAK, 1, 1);
+        SoundUtils.playSound(location, Sound.BLOCK_GLASS_BREAK, 1, 1);
         final List<Location> locationList = new ArrayList<>();
         for(double phi=0; phi<=Math.PI; phi+=Math.PI/15) {
             for(double theta=0; theta<=2*Math.PI; theta+=Math.PI/15) {
@@ -104,7 +103,7 @@ public class IcyShelter extends Ability {
                 locationList.add(location.clone());
 
                 if(location.getBlock().getType() == Material.AIR) {
-                    ParticleUtil.showParticle(Particle.BLOCK_CRACK, location, 5 ,0.2, 0.2, 0.2, 0, Material.ICE.createBlockData());
+                    ParticleUtils.showParticle(Particle.BLOCK_CRACK, location, 5 ,0.2, 0.2, 0.2, 0, Material.ICE.createBlockData());
                     location.getBlock().setType(Material.ICE);
                 }
                 location.subtract(x, y, z);

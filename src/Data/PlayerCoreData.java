@@ -7,6 +7,7 @@ import Items.Armors.ArmorType;
 import Items.Armors.Armors;
 import Items.Weapons.Weapons;
 import KeyBinds.Keys;
+import Mission.Mission;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
@@ -35,7 +36,11 @@ public class PlayerCoreData extends CoreData<Player> {
     /** CONFIGURATIONS */
     public boolean onDeath = false;
     public boolean showParticle = true;
+
+    /** VARIABLES */
     public Set<Player> nearbyRainStorms = new HashSet<>();
+    public Mission globalMission;
+    public Mission privateMission;
 
     PlayerCoreData(Player master) {
         super(master);

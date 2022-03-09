@@ -49,7 +49,7 @@ public class CoreData<T extends LivingEntity> {
     public boolean unstoppable = false; // 저지불가
 
     /** RECORDS */
-    public ConcurrentLinkedQueue<DamageRecord> takenDamages = new ConcurrentLinkedQueue<>();
+    public ConcurrentLinkedQueue<DamageRecord> takenDamages = new ConcurrentLinkedQueue<>(); // 받았던 피해 저장
 
     public CoreData(T master) {
         this.master = master;

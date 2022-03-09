@@ -2,7 +2,7 @@ package Utils;
 
 import java.util.Random;
 
-public class NumberUtil {
+public class NumberUtils {
     public static int randomInt(int min, int max) {
         try {
             if(max < min) throw new Exception("parameter 'min' cannot be bigger than 'max'");

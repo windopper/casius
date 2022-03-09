@@ -5,8 +5,8 @@ import Ability.AbilityHelper;
 import Ability.AbilitySlot;
 import Data.CoreData;
 import Data.PlayerCoreData;
-import Utils.ParticleUtil;
-import Utils.SoundUtil;
+import Utils.ParticleUtils;
+import Utils.SoundUtils;
 import org.bukkit.*;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -42,9 +42,9 @@ public class ElectromagneticPulse extends Ability {
     @Override
     public void abilityDesign(Location location) {
         location.add(0, 1, 0);
-        SoundUtil.playSound(location, Sound.ENTITY_GENERIC_EXPLODE, 1f, 1.5f);
-        ParticleUtil.scatterCircle(Particle.CLOUD, location, 1, 5, 1, null);
-        ParticleUtil.staticCircle(Particle.SPELL_WITCH, location, radius, 5, 10, 0.2, 2, 0.2, 0, null);
+        SoundUtils.playSound(location, Sound.ENTITY_GENERIC_EXPLODE, 1f, 1.5f);
+        ParticleUtils.scatterAxisYCircle(Particle.CLOUD, location, 1, 5, 1, null);
+        ParticleUtils.staticCircle(Particle.SPELL_WITCH, location, radius, 5, 10, 0.2, 2, 0.2, 0, null);
     }
 
     @Override

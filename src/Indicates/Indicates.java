@@ -1,6 +1,6 @@
 package Indicates;
 
-import Utils.NumberUtil;
+import Utils.NumberUtils;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
@@ -15,9 +15,9 @@ public class Indicates {
 
         Location _location = new Location(
                 location.getWorld(),
-                NumberUtil.randomDouble(X-1, X+1),
-                NumberUtil.randomDouble(Y-0.5, Y+0.5),
-                NumberUtil.randomDouble(Z-1, Z+1)
+                NumberUtils.randomDouble(X-1, X+1),
+                NumberUtils.randomDouble(Y-0.5, Y+0.5),
+                NumberUtils.randomDouble(Z-1, Z+1)
                 );
 
         ArmorStand armorStand = (ArmorStand) location.getWorld().spawnEntity(_location, EntityType.ARMOR_STAND);

@@ -6,10 +6,10 @@ import Ability.AbilitySlot;
 import Data.CoreData;
 import Data.PlayerCoreData;
 import Main.main;
-import Utils.DamageUtil;
-import Utils.ParticleUtil;
-import Utils.RotateUtil;
-import Utils.SoundUtil;
+import Utils.DamageUtils;
+import Utils.ParticleUtils;
+import Utils.RotateUtils;
+import Utils.SoundUtils;
 import org.bukkit.*;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -45,15 +45,15 @@ public class CurrentEmission extends Ability {
         double rpitch = Math.toRadians(pitch);
 
         for(Vector vector : getZigZag()) {
-            RotateUtil.transform(vector, ryaw, rpitch, 0);
+            RotateUtils.transform(vector, ryaw, rpitch, 0);
             Location cloneLoc = location.clone().add(vector);
-            ParticleUtil.showParticle(Particle.REDSTONE, cloneLoc, 1, 0, 0, 0, 0, new Particle.DustOptions(Color.YELLOW, 1));
+            ParticleUtils.showParticle(Particle.REDSTONE, cloneLoc, 1, 0, 0, 0, 0, new Particle.DustOptions(Color.YELLOW, 1));
 
             for(CoreData<? extends LivingEntity> targetCoreData : AbilityHelper.getValidEntitiesInRadiusWithBoundingBox(1.5, cloneLoc, master)) {
                 if(hit.contains(targetCoreData)) continue;
                 for(int i=0; i<3; i++) {
                     Bukkit.getScheduler().scheduleSyncDelayedTask(main.getPlugin(main.class), () -> {
-                        DamageUtil.giveDamage(playerCoreData, targetCoreData, 0, 0.9, 0);
+                        DamageUtils.giveDamage(playerCoreData, targetCoreData, 0, 0.9, 0);
                     }, i * 3);
                 }
                 hit.add(targetCoreData);
@@ -63,7 +63,7 @@ public class CurrentEmission extends Ability {
 
     @Override
     public void abilityDesign(Location location) {
-        SoundUtil.playSound(location, Sound.ENTITY_FIREWORK_ROCKET_TWINKLE, 2f, 1.8f);
+        SoundUtils.playSound(location, Sound.ENTITY_FIREWORK_ROCKET_TWINKLE, 2f, 1.8f);
     }
 
     @Override

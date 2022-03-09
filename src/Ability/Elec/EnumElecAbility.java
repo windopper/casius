@@ -8,6 +8,7 @@ public enum EnumElecAbility implements IEnumAbility {
     CurrentEmission("전류방출"),
     ElectromagneticPulse("전자기펄스"),
     ShockWave("전격파"),
+    Flash("전광석화"),
     ;
 
     private final String skillName;

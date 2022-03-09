@@ -31,12 +31,12 @@ public class DamageIndicates {
     }
 
     public DamageIndicates addElecDamage(int damage) {
-        content += ChatColor.of("#aa3dff")+"⚡ -"+damage+" ";
+        content += ChatColor.of("#aa3dff")+"§e⚡ -"+damage+" ";
         return this;
     }
 
     public DamageIndicates addWindDamage(int damage) {
-        content += ChatColor.of("#4e8cf8")+"☁ -"+damage+" ";
+        content += ChatColor.of("#4e8cf8")+"◎ -"+damage+" ";
         return this;
     }
 

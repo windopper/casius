@@ -40,19 +40,19 @@ public class ShockWave extends Ability {
             public void run() {
 
                 Vector v = new Vector(0, 0, count);
-                RotateUtil.transform(v, rYaw, rPitch, 0);
+                RotateUtils.transform(v, rYaw, rPitch, 0);
 
                 for(int i=-30; i<30; i+=5) {
                     Vector _v = v.clone().rotateAroundY(Math.toRadians(i));
                     loc.add(_v);
-                    ParticleUtil.showParticle(Particle.BLOCK_CRACK, loc, 5, 0.2, 0.2, 0.2, 0, Material.END_STONE.createBlockData());
-                    ParticleUtil.showParticle(Particle.FIREWORKS_SPARK, loc, 1, 0.2, 0.2, 0.2, 0.2);
+                    ParticleUtils.showParticle(Particle.BLOCK_CRACK, loc, 5, 0.2, 0.2, 0.2, 0, Material.END_STONE.createBlockData());
+                    ParticleUtils.showParticle(Particle.FIREWORKS_SPARK, loc, 1, 0.2, 0.2, 0.2, 0.2);
                     for(CoreData<? extends LivingEntity> targetCoreData : AbilityHelper.getValidEntitiesInRadiusWithBoundingBox(2, loc, master)) {
                         if(hit.contains(targetCoreData)) continue;
 
                         abilityEffect(targetCoreData);
-                        MotionUtil.playMotion(v, 2, targetCoreData);
-                        DamageUtil.giveDamage(playerCoreData, targetCoreData, 0, 3, 0);
+                        MotionUtils.playMotion(v, 2, targetCoreData);
+                        DamageUtils.giveDamage(playerCoreData, targetCoreData, 0, 3, 0);
 
                         hit.add(targetCoreData);
                     }
@@ -62,7 +62,7 @@ public class ShockWave extends Ability {
                 if(count >= 12) {
                     cancel();
                 }
-                SoundUtil.playSound(loc.clone().add(v), Sound.BLOCK_GLASS_BREAK, 1, 0.8f);
+                SoundUtils.playSound(loc.clone().add(v), Sound.BLOCK_GLASS_BREAK, 1, 0.8f);
                 count+=1.5;
 
             }
@@ -77,7 +77,7 @@ public class ShockWave extends Ability {
     @Override
     public void abilityEffect(CoreData<? extends LivingEntity> targetCoreData) {
         LivingEntity target = targetCoreData.master;
-        SoundUtil.playSound(target.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1, 1);
-        ParticleUtil.showParticle(Particle.EXPLOSION_HUGE, target.getLocation(), 1, 0.1, 0.1, 0.1, 0);
+        SoundUtils.playSound(target.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1, 1);
+        ParticleUtils.showParticle(Particle.EXPLOSION_HUGE, target.getLocation(), 1, 0.1, 0.1, 0.1, 0);
     }
 }

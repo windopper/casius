@@ -6,7 +6,7 @@ import Data.Core;
 import Data.CoreData;
 import Data.PlayerCoreData;
 import Main.main;
-import Utils.ParticleUtil;
+import Utils.ParticleUtils;
 import net.minecraft.network.protocol.game.PacketPlayOutGameStateChange;
 import org.bukkit.Color;
 import org.bukkit.Location;
@@ -22,6 +22,7 @@ public class RainStorm extends Ability {
     public BukkitTask scheduler;
     private final int stormDistance = 10;
     private final int stormHeight = 7;
+    private boolean onStorm = false;
 
     public RainStorm() {
         super(
@@ -33,9 +34,17 @@ public class RainStorm extends Ability {
     }
 
     @Override
+    public void init(PlayerCoreData playerCoreData) {
+        super.init(playerCoreData);
+        if(onStorm) manipulatedEnergyRequire = 0;
+    }
+
+    @Override
     public void invokeAbility(final PlayerCoreData playerCoreData) {
 
         Player master = playerCoreData.master;
+
+        onStorm = !onStorm;
 
         if(scheduler != null) {
             scheduler.cancel();
@@ -91,10 +100,10 @@ public class RainStorm extends Ability {
 
     @Override
     public void abilityDesign(Location location) {
-        ParticleUtil.showParticle(Particle.CLOUD, location.clone().add(0, stormHeight, 0), 40, 3, 0.2, 3, 0);
-        ParticleUtil.showParticle(Particle.REDSTONE, location.clone().add(0, stormHeight, 0), 50, 3, 0.2, 3, 0,
+        ParticleUtils.showParticle(Particle.CLOUD, location.clone().add(0, stormHeight, 0), 40, 3, 0.2, 3, 0);
+        ParticleUtils.showParticle(Particle.REDSTONE, location.clone().add(0, stormHeight, 0), 50, 3, 0.2, 3, 0,
                 new Particle.DustOptions(Color.GRAY, 2));
-        ParticleUtil.showParticle(Particle.WATER_DROP, location.clone().add(0, 1, 0), 40, 3, 0.5, 3, 0);
+        ParticleUtils.showParticle(Particle.WATER_DROP, location.clone().add(0, 1, 0), 40, 3, 0.5, 3, 0);
     }
 
     @Override
